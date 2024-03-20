@@ -13,7 +13,7 @@ A commercial-grade web interface for a classified advertisements website tailore
 ### Installing Django
 
 1. Install Python
-2. Run `pip install django` in project folder
+2. Run `pip install -r requirements.txt` in project folder
 
 ### Setting up Django
 
