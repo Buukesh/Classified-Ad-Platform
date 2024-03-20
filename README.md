@@ -4,16 +4,23 @@ A commercial-grade web interface for a classified advertisements website tailore
 
 ## Setup
 
-### Frontend
+### Installing npm and node
 
 1. Install npm
 2. Install Node.js
 3. Run `npm install` in project folder
 
-### Backend
+### Installing Django
 
 1. Install Python
 2. Run `pip install django` in project folder
+
+### Setting up Django
+
+1. `cd cap_backend`
+2. `python manage.py makemigrations`
+3. `python manage.py migrate`
+4. `python manage.py createsuperuser`
 
 ## Running the project
 

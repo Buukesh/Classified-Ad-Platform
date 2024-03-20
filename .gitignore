@@ -26,3 +26,11 @@ dist-ssr
 # Python
 __pycache__/
 *.py[cod]
+
+# Database
+db.sqlite3
+
+# Migration files
+**/migrations/**
+!**/migrations
+!**/migrations/__init__.py
