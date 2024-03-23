@@ -33,3 +33,29 @@ A commercial-grade web interface for a classified advertisements website tailore
 `cd cap_backend`
 
 `python manage.py runserver`
+
+## API Endpoints
+
+Base URL: <localhost:8000/api>
+
+### `/users`
+
+`POST`
+
+```json
+{
+    "username": "",
+    "password": "",
+    "email": ""
+}
+```
+
+### `/ads`
+
+`GET`
+
+`POST`
+
+## Admin Dashboard
+
+<localhost:8000/admin/>
