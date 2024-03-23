@@ -31,4 +31,5 @@ A commercial-grade web interface for a classified advertisements website tailore
 ### Backend
 
 `cd cap_backend`
+
 `python manage.py runserver`
