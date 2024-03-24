@@ -1,0 +1,22 @@
+GET http://127.0.0.1:8000/api/ads
+
+###
+
+POST http://127.0.0.1:8000/api/users
+Content-Type: application/json
+
+{
+    "username": "John",
+    "password": "1234",
+    "email": "john@gmail.com"
+}
+
+###
+
+POST http://127.0.0.1:8000/api/token
+Content-Type: application/json
+
+{
+    "username": "John",
+    "password": "1234"
+}
