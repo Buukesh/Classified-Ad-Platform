@@ -42,6 +42,10 @@ Base URL: <http://127.0.0.1:8000/api>
 
 `POST`
 
+```plaintext
+Content-Type: application/json
+```
+
 ```json
 {
     "username": "",
@@ -60,6 +64,10 @@ Base URL: <http://127.0.0.1:8000/api>
 
 `POST`
 
+```plaintext
+Content-Type: application/json
+```
+
 ```json
 {
     "username": "",
@@ -67,6 +75,22 @@ Base URL: <http://127.0.0.1:8000/api>
 }
 ```
 
+### `/messages`
+
+`POST`
+
+```plaintext
+Content-Type: application/json
+Authorization: Token AUTH_TOKEN_HERE
+```
+
+```json
+{
+    "ad_id": 1,
+    "message": ""
+}
+```
+
 ## Admin Dashboard
 
-<http://127.0.0.1:8000/admin/>
+<http://127.0.0.1:8000/admin>

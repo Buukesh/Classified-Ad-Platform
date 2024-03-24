@@ -24,4 +24,5 @@ urlpatterns = [
     path("api/ads", include("ads.urls")),
     path("api/users", include("users.urls")),
     path("api/token", obtain_auth_token),
+    path("api/messages", include("msg.urls")),
 ]
