@@ -36,7 +36,7 @@ A commercial-grade web interface for a classified advertisements website tailore
 
 ## API Endpoints
 
-Base URL: <localhost:8000/api>
+Base URL: <http://127.0.0.1:8000/api>
 
 ### `/users`
 
@@ -56,6 +56,17 @@ Base URL: <localhost:8000/api>
 
 `POST`
 
+### `/token`
+
+`POST`
+
+```json
+{
+    "username": "",
+    "password": ""
+}
+```
+
 ## Admin Dashboard
 
-<localhost:8000/admin/>
+<http://127.0.0.1:8000/admin/>
