@@ -1,5 +1,19 @@
 GET http://127.0.0.1:8000/api/ads
 
+###
+
+POST http://127.0.0.1:8000/api/ads
+Content-Type: application/json
+Authorization: Token dbdef7e2cd08847828130c4c5948ca3182aab984
+
+{
+    "title": "Book for sale",
+    "content": "Book",
+    "price": "50",
+    "category": "IS",
+    "item": "Book"
+}
+
 ### users
 
 POST http://127.0.0.1:8000/api/users
