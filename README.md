@@ -51,3 +51,5 @@ The API documentation is generated with `drf-spectacular` for the OpenAPI 3 sche
 <http://127.0.0.1:8000/admin>
 
 ## API Documentation
+
+[Documentation](cap_backend/docs.md)
