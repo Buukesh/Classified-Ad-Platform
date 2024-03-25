@@ -22,6 +22,10 @@ A commercial-grade web interface for a classified advertisements website tailore
 3. `python manage.py migrate`
 4. `python manage.py createsuperuser`
 
+After changing any models run:
+
+`.\update_db.bat`
+
 ## Running the project
 
 ### Frontend
@@ -32,30 +36,20 @@ A commercial-grade web interface for a classified advertisements website tailore
 
 `cd cap_backend`
 
-`python manage.py runserver`
+`python manage.py runserver` or `.\run_server.bat`
 
-## API Endpoints
+### Generate documentation
 
-Base URL: <localhost:8000/api>
+The API documentation is generated with `drf-spectacular` for the OpenAPI 3 schema and `widdershins` for converting that into markdown.
 
-### `/users`
-
-`POST`
-
-```json
-{
-    "username": "",
-    "password": "",
-    "email": ""
-}
-```
-
-### `/ads`
-
-`GET`
-
-`POST`
+1. `cd cap_backend`
+2. `python manage.py spectacular --color --file schema.yml`
+3. `npm run make-docs`
 
 ## Admin Dashboard
 
-<localhost:8000/admin/>
+<http://127.0.0.1:8000/admin>
+
+## API Documentation
+
+[Documentation](cap_backend/docs.md)

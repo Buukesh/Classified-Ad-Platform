@@ -1,0 +1,47 @@
+GET http://127.0.0.1:8000/api/ads
+
+###
+
+POST http://127.0.0.1:8000/api/ads
+Content-Type: application/json
+Authorization: Token dbdef7e2cd08847828130c4c5948ca3182aab984
+
+{
+    "title": "Book for sale",
+    "content": "Book",
+    "price": "50",
+    "category": "IS",
+    "item": "Book"
+}
+
+### users
+
+POST http://127.0.0.1:8000/api/users
+Content-Type: application/json
+
+{
+    "username": "John",
+    "password": "1234",
+    "email": "john@gmail.com"
+}
+
+### token
+
+POST http://127.0.0.1:8000/api/token
+Content-Type: application/json
+
+{
+    "username": "John",
+    "password": "1234"
+}
+
+### messages
+
+POST http://127.0.0.1:8000/api/messages
+Content-Type: application/json
+Authorization: Token dbdef7e2cd08847828130c4c5948ca3182aab984
+
+{
+    "ad_id": 1,
+    "message": "test"
+}

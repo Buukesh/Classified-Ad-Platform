@@ -1,0 +1,11 @@
+{
+  "name": "cap_backend",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "make-docs": "widdershins schema.yml -o docs.md --search false --environment w.json"
+  },
+  "devDependencies": {
+    "widdershins": "^4.0.1"
+  }
+}
