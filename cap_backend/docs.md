@@ -71,6 +71,13 @@ fetch('/api/ads',
 [
   {
     "id": 0,
+    "images": [
+      {
+        "id": 0,
+        "image": "http://example.com",
+        "ad": 0
+      }
+    ],
     "title": "string",
     "content": "string",
     "date": "2019-08-24T14:15:22Z",
@@ -97,6 +104,10 @@ Status Code **200**
 |---|---|---|---|---|
 |*anonymous*|[[Ad](#schemaad)]|false|none|none|
 |» id|integer|true|read-only|none|
+|» images|[[AdImage](#schemaadimage)]|false|none|none|
+|»» id|integer|true|read-only|none|
+|»» image|string(uri)|true|none|none|
+|»» ad|integer|true|read-only|none|
 |» title|string|true|none|none|
 |» content|string|true|none|none|
 |» date|string(date-time)|true|read-only|none|
@@ -128,7 +139,7 @@ tokenAuth, None
 ```shell
 # You can also use wget
 curl -X POST /api/ads \
-  -H 'Content-Type: application/json' \
+  -H 'Content-Type: multipart/form-data' \
   -H 'Accept: application/json' \
   -H 'Authorization: API_KEY'
 
@@ -136,6 +147,11 @@ curl -X POST /api/ads \
 
 ```javascript
 const inputBody = '{
+  "images": [
+    {
+      "image": "http://example.com"
+    }
+  ],
   "title": "string",
   "content": "string",
   "price": "string",
@@ -143,7 +159,7 @@ const inputBody = '{
   "item": "string"
 }';
 const headers = {
-  'Content-Type':'application/json',
+  'Content-Type':'multipart/form-data',
   'Accept':'application/json',
   'Authorization':'API_KEY'
 };
@@ -168,6 +184,11 @@ fetch('/api/ads',
 
 ```json
 {
+  "images": [
+    {
+      "image": "http://example.com"
+    }
+  ],
   "title": "string",
   "content": "string",
   "price": "string",
@@ -177,6 +198,8 @@ fetch('/api/ads',
 ```
 
 ```yaml
+images:
+  - image: http://example.com
 title: string
 content: string
 price: string
@@ -198,6 +221,13 @@ item: string
 ```json
 {
   "id": 0,
+  "images": [
+    {
+      "id": 0,
+      "image": "http://example.com",
+      "ad": 0
+    }
+  ],
   "title": "string",
   "content": "string",
   "date": "2019-08-24T14:15:22Z",
@@ -490,6 +520,13 @@ tokenAuth, None
 ```json
 {
   "id": 0,
+  "images": [
+    {
+      "id": 0,
+      "image": "http://example.com",
+      "ad": 0
+    }
+  ],
   "title": "string",
   "content": "string",
   "date": "2019-08-24T14:15:22Z",
@@ -507,6 +544,7 @@ tokenAuth, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |id|integer|true|read-only|none|
+|images|[[AdImage](#schemaadimage)]|false|none|none|
 |title|string|true|none|none|
 |content|string|true|none|none|
 |date|string(date-time)|true|read-only|none|
@@ -515,6 +553,30 @@ tokenAuth, None
 |category|[CategoryEnum](#schemacategoryenum)|true|none|* `IW` - Items Wanted<br>* `IS` - Items for Sale<br>* `AS` - Academic Services|
 |item|string|true|none|none|
 |user|integer|true|read-only|none|
+
+<h2 id="tocS_AdImage">AdImage</h2>
+<!-- backwards compatibility -->
+<a id="schemaadimage"></a>
+<a id="schema_AdImage"></a>
+<a id="tocSadimage"></a>
+<a id="tocsadimage"></a>
+
+```json
+{
+  "id": 0,
+  "image": "http://example.com",
+  "ad": 0
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|integer|true|read-only|none|
+|image|string(uri)|true|none|none|
+|ad|integer|true|read-only|none|
 
 <h2 id="tocS_AuthToken">AuthToken</h2>
 <!-- backwards compatibility -->

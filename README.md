@@ -46,6 +46,8 @@ The API documentation is generated with `drf-spectacular` for the OpenAPI 3 sche
 2. `python manage.py spectacular --color --file schema.yml`
 3. `npm run make-docs`
 
+Or `.\make_docs.bat`
+
 ## Admin Dashboard
 
 <http://127.0.0.1:8000/admin>

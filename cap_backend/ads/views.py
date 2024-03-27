@@ -1,4 +1,5 @@
 from rest_framework import generics
+from rest_framework.parsers import JSONParser, MultiPartParser
 from rest_framework.permissions import AllowAny, IsAuthenticated
 
 from .models import Ad
@@ -8,6 +9,8 @@ from .serializers import AdSerializer
 class AdListCreateAPIView(generics.ListCreateAPIView):
     queryset = Ad.objects.all()
     serializer_class = AdSerializer
+    # for multipart form upload
+    parser_classes = (MultiPartParser, JSONParser)
 
     def get_permissions(self):
         if self.request.method == "GET":
