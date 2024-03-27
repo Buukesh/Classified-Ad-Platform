@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 class Ad(models.Model):
@@ -20,3 +20,9 @@ class Ad(models.Model):
 
     def __str__(self):
         return self.title
+
+
+class AdImage(models.Model):
+    ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
+    # this is a subfolder, so path is media/ad_images/
+    image = models.ImageField(upload_to="ad_images/")

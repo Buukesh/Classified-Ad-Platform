@@ -1,6 +1,9 @@
+# get all ads
 GET http://127.0.0.1:8000/api/ads
 
-###
+### -----------------------------------------------------------------
+
+# create ad with no images
 
 POST http://127.0.0.1:8000/api/ads
 Content-Type: application/json
@@ -14,7 +17,44 @@ Authorization: Token dbdef7e2cd08847828130c4c5948ca3182aab984
     "item": "Book"
 }
 
-### users
+### -----------------------------------------------------------------
+
+# create ad with image upload
+
+POST http://127.0.0.1:8000/api/ads
+Content-Type: multipart/form-data; boundary=boundary
+Authorization: Token dbdef7e2cd08847828130c4c5948ca3182aab984
+
+--boundary
+Content-Disposition: form-data; name="title"
+
+Book for sale
+--boundary
+Content-Disposition: form-data; name="content"
+
+Book
+--boundary
+Content-Disposition: form-data; name="price"
+
+50
+--boundary
+Content-Disposition: form-data; name="category"
+
+IS
+--boundary
+Content-Disposition: form-data; name="item"
+
+Book
+--boundary
+Content-Disposition: form-data; name="images"; filename="test_img.png"
+Content-Type: image/png
+
+< test_img.png
+--boundary
+
+### -----------------------------------------------------------------
+
+# create user
 
 POST http://127.0.0.1:8000/api/users
 Content-Type: application/json
@@ -25,7 +65,9 @@ Content-Type: application/json
     "email": "john@gmail.com"
 }
 
-### token
+### -----------------------------------------------------------------
+
+# get auth token
 
 POST http://127.0.0.1:8000/api/token
 Content-Type: application/json
@@ -35,7 +77,9 @@ Content-Type: application/json
     "password": "1234"
 }
 
-### messages
+### -----------------------------------------------------------------
+
+# create message for ad 1
 
 POST http://127.0.0.1:8000/api/messages
 Content-Type: application/json

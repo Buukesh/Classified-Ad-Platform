@@ -35,4 +35,10 @@ db.sqlite3
 !**/migrations
 !**/migrations/__init__.py
 
+# openapi schema
 schema.yml
+
+# uploaded images
+media/
+
+test_img.png

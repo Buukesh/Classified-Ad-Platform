@@ -139,6 +139,7 @@ REST_FRAMEWORK = {
     "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
+# auto docs settings
 SPECTACULAR_SETTINGS = {
     "TITLE": "Classified Ad Platform API",
     "DESCRIPTION": "A commercial-grade web interface for a classified advertisements "
@@ -146,3 +147,7 @@ SPECTACULAR_SETTINGS = {
     "VERSION": "1.0.0",
     "SERVE_INCLUDE_SCHEMA": False,
 }
+
+# for image uploads
+MEDIA_URL = "/media/"
+MEDIA_ROOT = BASE_DIR / "media"
