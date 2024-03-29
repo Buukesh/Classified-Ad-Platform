@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const Ad = ({ imgSrc, title, description }) => {
   return (
     <a href="#">
@@ -11,6 +13,12 @@ const Ad = ({ imgSrc, title, description }) => {
       </div>
     </a>
   );
+};
+
+Ad.propTypes = {
+  imgSrc: PropTypes.string,
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
 };
 
 export default Ad;
