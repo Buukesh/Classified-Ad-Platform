@@ -1,18 +1,14 @@
 import { useState, useEffect } from "react";
 import Ad from "./Ad";
+import { fetchData } from "../../utils";
 
 const AdList = () => {
   const [ads, setAds] = useState([]);
 
   useEffect(() => {
     const getAds = async () => {
-      try {
-        const response = await fetch("/api/ads");
-        const data = await response.json();
-        setAds(data);
-      } catch (e) {
-        console.error("Error getting ads:", e);
-      }
+      const data = await fetchData("/api/ads");
+      setAds(data);
     };
 
     getAds();
