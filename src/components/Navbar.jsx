@@ -30,10 +30,10 @@ const NavBar = () => {
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         <li>
-                            <a>Post Ad</a>
+                            <a>Ad Listings</a>
                         </li>
                         <li>
-                            <a>Messages</a>
+                            <a>Create Ad Post</a>
                         </li>
                     </ul>
                 </div>
@@ -42,15 +42,15 @@ const NavBar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <a>Post Ad</a>
+                        <a>Ad Listings</a>
                     </li>
                     <li>
-                        <a>Messages</a>
+                        <a>Create Ad Post</a>
                     </li>
                 </ul>
             </div>
             <div className="navbar-end">
-                <a className="btn">Button</a>
+                <a className="btn">Messages</a>
             </div>
         </div>
     );
