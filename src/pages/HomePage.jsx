@@ -1,10 +1,14 @@
 import AdList from "../components/AdList.jsx";
-import Navbar from "../components/Navbar.jsx";
+import NavBar from "../components/NavBar.jsx";
+import SearchBar from "../components/SearchBar.jsx";
 
 const HomePage = () => {
     return (
         <section className="bg-black-800">
-            <Navbar />
+            <NavBar />
+            <div className="my-10"></div>
+            <SearchBar />
+            <div className="my-10"></div>
             <AdList />
         </section>
     );

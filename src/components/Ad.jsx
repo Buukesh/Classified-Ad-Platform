@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 
 const Ad = ({ imgSrc, title, description }) => {
     return (
-        <a href="#">
-            <div className="card card-side bg-base-100 shadow-xl">
+        <a href="#" className="flex justify-center">
+            <div className="card lg:card-side shadow-xl w-1/2 lg:w-1/2">
                 <img src={imgSrc} />
 
-                <div className="card-body">
+                <div className="card-body bg-base-200">
                     <h2 className="card-title">{title}</h2>
                     <p>{description}</p>
                 </div>
