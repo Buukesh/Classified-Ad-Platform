@@ -1,11 +1,19 @@
-// LoginPage.jsx
-import React, { useState } from "react";
+import { useState } from "react";
+
+import { useNavigate } from "react-router-dom";
+
+import { postData } from "../../utils";
+import useAppContext from "../context/useAppContext";
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({
         email: "",
         password: "",
     });
+    const [isLoading, setIsLoading] = useState(false);
+
+    const { setToken } = useAppContext();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -15,10 +23,22 @@ const LoginPage = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log("Login form submitted:", formData);
-        // Add login logic here (e.g., API call)
+
+        // when this boolean is set, a loading animation will show
+        setIsLoading(true);
+
+        const data = await postData("/api/token", {
+            username: formData.email,
+            password: formData.password,
+        });
+
+        setToken(data.token);
+        setIsLoading(false);
+
+        // go to homepage after logging in
+        navigate("/");
     };
 
     return (
@@ -42,6 +62,7 @@ const LoginPage = () => {
                             className="input w-full max-w-xs"
                             placeholder="name@torontomu.ca"
                             required
+                            onChange={handleChange}
                         />
                     </div>
                     <div>
@@ -55,10 +76,18 @@ const LoginPage = () => {
                             className="input w-full max-w-xs"
                             placeholder="••••••••"
                             required
+                            onChange={handleChange}
                         />
                     </div>
                     <div className="card-actions justify-center">
-                        <button className="btn btn-primary">Sign in</button>
+                        <button
+                            className={`btn btn-primary ${
+                                isLoading ? "loading" : ""
+                            }`}
+                            onClick={handleSubmit}
+                        >
+                            Sign in
+                        </button>
                     </div>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                         Don’t have an account yet?{" "}
