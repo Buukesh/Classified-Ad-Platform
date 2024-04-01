@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
 import { postData } from "../../utils";
 import useAppContext from "../context/useAppContext";
 
@@ -8,8 +10,10 @@ const LoginPage = () => {
         email: "",
         password: "",
     });
+    const [isLoading, setIsLoading] = useState(false);
 
     const { setToken } = useAppContext();
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -22,12 +26,19 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // when this boolean is set, a loading animation will show
+        setIsLoading(true);
+
         const data = await postData("/api/token", {
             username: formData.email,
             password: formData.password,
         });
 
         setToken(data.token);
+        setIsLoading(false);
+
+        // go to homepage after logging in
+        navigate("/");
     };
 
     return (
@@ -70,7 +81,9 @@ const LoginPage = () => {
                     </div>
                     <div className="card-actions justify-center">
                         <button
-                            className="btn btn-primary"
+                            className={`btn btn-primary ${
+                                isLoading ? "loading" : ""
+                            }`}
                             onClick={handleSubmit}
                         >
                             Sign in
