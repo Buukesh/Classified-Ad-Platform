@@ -1,5 +1,5 @@
 import AdList from "../components/AdList.jsx";
-import NavBar from "../components/NavBar.jsx";
+import NavBar from "../components/Navbar.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 
 const HomePage = () => {
