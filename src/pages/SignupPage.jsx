@@ -1,8 +1,8 @@
-import React, { useState } from "react";
-import { Button } from "daisyui";
+import { useState } from "react";
 
 const SignupPage = () => {
     const [formData, setFormData] = useState({
+        username: "",
         email: "",
         password: "",
     });
@@ -49,6 +49,7 @@ const SignupPage = () => {
 
     const isFormValid = () => {
         return (
+            formData.username.trim() !== "" &&
             formData.email.trim() !== "" &&
             formData.password.trim() !== "" &&
             !emailError &&
@@ -70,6 +71,20 @@ const SignupPage = () => {
                         className="mb-4 rounded-lg w-24 h-24 mx-auto"
                     />
                     <h2 className="card-title">Create an account</h2>
+                    <div>
+                        <label htmlFor="username" className="label">
+                            Your Username
+                        </label>
+                        <input
+                            type="username"
+                            id="username"
+                            name="username"
+                            className="input input-bordered input-primary w-full max-w-xs"
+                            placeholder="Enter username"
+                            required
+                            onChange={handleChange}
+                        />
+                    </div>
                     <div>
                         <label htmlFor="email" className="label">
                             Your Email
@@ -140,7 +155,7 @@ const SignupPage = () => {
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                         Already have an account?{" "}
                         <a
-                            href="#"
+                            href="/login"
                             className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                         >
                             Sign in
