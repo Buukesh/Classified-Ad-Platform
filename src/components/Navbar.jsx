@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-
 const NavBar = () => {
     return (
         <div className="navbar bg-base-200">
@@ -37,15 +35,17 @@ const NavBar = () => {
                         </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">TMU</a>
+                <a className="btn btn-ghost text-xl" href="/">
+                    TMU
+                </a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <a>Ad Listings</a>
+                        <a href="/">Ad Listings</a>
                     </li>
                     <li>
-                        <a>Create Ad Post</a>
+                        <a href="/new">Create Ad Post</a>
                     </li>
                 </ul>
             </div>

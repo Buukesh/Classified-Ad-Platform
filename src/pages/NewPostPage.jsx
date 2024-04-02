@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import NavBar from "../components/NavBar.jsx";
+import { useState } from "react";
+
+import NavBar from "../components/Navbar.jsx";
 import PhotoUpload from "../components/PhotoUpload.jsx";
 
 const NewPostPage = () => {
