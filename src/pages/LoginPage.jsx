@@ -11,6 +11,7 @@ const LoginPage = () => {
         password: "",
     });
     const [isLoading, setIsLoading] = useState(false);
+    const [showPassword, setShowPassword] = useState(false);
 
     const { setToken } = useAppContext();
     const navigate = useNavigate();
@@ -41,6 +42,10 @@ const LoginPage = () => {
         navigate("/");
     };
 
+    const toggleShowPassword = () => {
+        setShowPassword(!showPassword);
+    };
+
     return (
         <section className="flex items-center justify-center min-h-screen">
             <div className="card w-96 bg-base-200 shadow-xl">
@@ -65,23 +70,31 @@ const LoginPage = () => {
                             onChange={handleChange}
                         />
                     </div>
-                    <div>
+                    <div className="relative">
                         <label htmlFor="password" className="label">
                             Password
                         </label>
-                        <input
-                            type="password"
-                            id="password"
-                            name="password"
-                            className="input input-bordered input-primary w-full max-w-xs"
-                            placeholder="••••••••"
-                            required
-                            onChange={handleChange}
-                        />
+                        <div className="join">
+                            <input
+                                type={showPassword ? "text" : "password"}
+                                id="password"
+                                name="password"
+                                className="input input-bordered input-primary join-item w-full max-w-xs pr-20"
+                                placeholder="••••••••"
+                                required
+                                onChange={handleChange}
+                            />
+                            <button
+                                className="btn btn-primary join-item"
+                                onClick={toggleShowPassword}
+                            >
+                                {showPassword ? "Hide" : "Show"}
+                            </button>
+                        </div>
                     </div>
                     <div className="card-actions justify-center">
                         <button
-                            className={`btn btn-primary ${
+                            className={`btn btn-secondary ${
                                 isLoading ? "loading" : ""
                             }`}
                             onClick={handleSubmit}
