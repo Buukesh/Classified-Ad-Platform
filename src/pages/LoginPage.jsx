@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { postData } from "../../utils";
-import useAppContext from "../context/useAppContext";
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({
@@ -13,7 +12,6 @@ const LoginPage = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
 
-    const { setToken } = useAppContext();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -35,8 +33,10 @@ const LoginPage = () => {
             password: formData.password,
         });
 
-        setToken(data.token);
         setIsLoading(false);
+
+        // save to local storage so it stays after refresh
+        localStorage.setItem("token", data.token);
 
         // go to homepage after logging in
         navigate("/");

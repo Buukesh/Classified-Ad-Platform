@@ -1,6 +1,13 @@
-import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NavBar = () => {
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
+
     return (
         <div className="navbar bg-base-200">
             <div className="navbar-start">
@@ -37,20 +44,33 @@ const NavBar = () => {
                         </li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">TMU</a>
+                <a className="btn btn-ghost text-xl" href="/">
+                    TMU
+                </a>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <a>Ad Listings</a>
+                        <a href="/">Ad Listings</a>
                     </li>
                     <li>
-                        <a>Create Ad Post</a>
+                        <a href="/new">Create Ad Post</a>
                     </li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Messages</a>
+            <div className="navbar-end hidden lg:flex">
+                <ul className="menu menu-horizontal px-1">
+                    <li>
+                        <a href="#" className="btn">
+                            Messages
+                        </a>
+                    </li>
+                    <li>
+                        <a className="btn" onClick={logout}>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     );

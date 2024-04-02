@@ -1,23 +1,10 @@
-import { useEffect } from "react";
-
-import { useNavigate } from "react-router-dom";
-
 import AdList from "../components/AdList.jsx";
 import NavBar from "../components/Navbar.jsx";
 import SearchBar from "../components/SearchBar.jsx";
-import useAppContext from "../context/useAppContext";
+import useAuthCheck from "../hooks/useAuthCheck.js";
 
 const HomePage = () => {
-    const { token } = useAppContext();
-    const navigate = useNavigate();
-
-    useEffect(() => {
-        // this runs when homepage loads
-        if (!token) {
-            // if token not set (not logged in), go to signup
-            navigate("/signup");
-        }
-    }, [token, navigate]);
+    useAuthCheck();
 
     return (
         <section className="bg-black-800">
