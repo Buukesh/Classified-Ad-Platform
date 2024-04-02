@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Button } from "daisyui";
 
 const SignupPage = () => {
     const [formData, setFormData] = useState({
