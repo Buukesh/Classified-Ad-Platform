@@ -1,4 +1,13 @@
+import { useNavigate } from "react-router-dom";
+
 const NavBar = () => {
+    const navigate = useNavigate();
+
+    const logout = () => {
+        localStorage.removeItem("token");
+        navigate("/login");
+    };
+
     return (
         <div className="navbar bg-base-200">
             <div className="navbar-start">
@@ -49,8 +58,19 @@ const NavBar = () => {
                     </li>
                 </ul>
             </div>
-            <div className="navbar-end">
-                <a className="btn">Messages</a>
+            <div className="navbar-end hidden lg:flex">
+                <ul className="menu menu-horizontal px-1">
+                    <li>
+                        <a href="#" className="btn">
+                            Messages
+                        </a>
+                    </li>
+                    <li>
+                        <a className="btn" onClick={logout}>
+                            Logout
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
     );
