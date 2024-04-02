@@ -10,17 +10,14 @@ const SearchBar = () => {
     return (
         <div className="flex justify-center">
             <div className="join join-vertical lg:join-horizontal">
-                <div>
-                    <div>
-                        <input
-                            id="searchInput"
-                            className="input input-bordered join-item bg-base-200 rounded-none"
-                            placeholder="Search"
-                        />
-                    </div>
-                </div>
+                <input
+                    id="searchInput"
+                    className="input input-bordered input-primary join-item bg-base-200 rounded-none"
+                    placeholder="Search"
+                />
+
                 <select
-                    className="select select-bordered join-item bg-base-200"
+                    className="select select-bordered select-primary join-item bg-base-200"
                     id="categoryMenu"
                     value={category}
                     onChange={handleCategoryChange}
@@ -33,11 +30,8 @@ const SearchBar = () => {
                     <option value="Items for Sale">Items for Sale</option>
                     <option value="Academic Services">Academic Services</option>
                 </select>
-                <div className="indicator">
-                    <button className="btn btn-primary join-item ">
-                        Search
-                    </button>
-                </div>
+
+                <button className="btn btn-primary join-item ">Search</button>
             </div>
         </div>
     );
