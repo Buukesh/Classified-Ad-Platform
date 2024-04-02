@@ -7,7 +7,7 @@ import useAppContext from "../context/useAppContext";
 
 const LoginPage = () => {
     const [formData, setFormData] = useState({
-        email: "",
+        username: "",
         password: "",
     });
     const [isLoading, setIsLoading] = useState(false);
@@ -31,7 +31,7 @@ const LoginPage = () => {
         setIsLoading(true);
 
         const data = await postData("/api/token", {
-            username: formData.email,
+            username: formData.username,
             password: formData.password,
         });
 
@@ -57,15 +57,15 @@ const LoginPage = () => {
                     />
                     <h2 className="card-title">Sign in to your account</h2>
                     <div>
-                        <label htmlFor="email" className="label">
-                            Your Email
+                        <label htmlFor="username" className="label">
+                            Your Username
                         </label>
                         <input
-                            type="email"
-                            id="email"
-                            name="email"
+                            type="username"
+                            id="username"
+                            name="username"
                             className="input input-bordered input-primary w-full max-w-xs"
-                            placeholder="name@torontomu.ca"
+                            placeholder="Enter username"
                             required
                             onChange={handleChange}
                         />
@@ -120,7 +120,7 @@ const LoginPage = () => {
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                         Don’t have an account yet?{" "}
                         <a
-                            href="#"
+                            href="/signup"
                             className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                         >
                             Sign up

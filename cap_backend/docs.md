@@ -71,21 +71,24 @@ fetch('/api/ads',
 [
   {
     "id": 0,
-    "images": [
-      {
-        "id": 0,
-        "image": "http://example.com",
-        "ad": 0
-      }
-    ],
     "title": "string",
     "content": "string",
     "date": "2019-08-24T14:15:22Z",
     "modified": "2019-08-24T14:15:22Z",
+    "user": {
+      "id": 0,
+      "username": "string"
+    },
     "price": "string",
     "category": "IW",
     "item": "string",
-    "user": 0
+    "images": [
+      {
+        "id": 0,
+        "ad": 0,
+        "image": "http://example.com"
+      }
+    ]
   }
 ]
 ```
@@ -104,18 +107,20 @@ Status Code **200**
 |---|---|---|---|---|
 |*anonymous*|[[Ad](#schemaad)]|false|none|none|
 |» id|integer|true|read-only|none|
-|» images|[[AdImage](#schemaadimage)]|false|none|none|
-|»» id|integer|true|read-only|none|
-|»» image|string(uri)|true|none|none|
-|»» ad|integer|true|read-only|none|
 |» title|string|true|none|none|
 |» content|string|true|none|none|
 |» date|string(date-time)|true|read-only|none|
 |» modified|string(date-time)|true|read-only|none|
+|» user|[PublicUser](#schemapublicuser)|true|read-only|none|
+|»» id|integer|true|read-only|none|
+|»» username|string|true|none|Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.|
 |» price|string(decimal)|true|none|none|
 |» category|[CategoryEnum](#schemacategoryenum)|true|none|* `IW` - Items Wanted<br>* `IS` - Items for Sale<br>* `AS` - Academic Services|
 |» item|string|true|none|none|
-|» user|integer|true|read-only|none|
+|» images|[[AdImage](#schemaadimage)]|true|read-only|none|
+|»» id|integer|true|read-only|none|
+|»» ad|integer|true|read-only|none|
+|»» image|string(uri)|true|none|none|
 
 #### Enumerated Values
 
@@ -147,11 +152,6 @@ curl -X POST /api/ads \
 
 ```javascript
 const inputBody = '{
-  "images": [
-    {
-      "image": "http://example.com"
-    }
-  ],
   "title": "string",
   "content": "string",
   "price": "string",
@@ -184,11 +184,6 @@ fetch('/api/ads',
 
 ```json
 {
-  "images": [
-    {
-      "image": "http://example.com"
-    }
-  ],
   "title": "string",
   "content": "string",
   "price": "string",
@@ -198,8 +193,6 @@ fetch('/api/ads',
 ```
 
 ```yaml
-images:
-  - image: http://example.com
 title: string
 content: string
 price: string
@@ -221,21 +214,24 @@ item: string
 ```json
 {
   "id": 0,
-  "images": [
-    {
-      "id": 0,
-      "image": "http://example.com",
-      "ad": 0
-    }
-  ],
   "title": "string",
   "content": "string",
   "date": "2019-08-24T14:15:22Z",
   "modified": "2019-08-24T14:15:22Z",
+  "user": {
+    "id": 0,
+    "username": "string"
+  },
   "price": "string",
   "category": "IW",
   "item": "string",
-  "user": 0
+  "images": [
+    {
+      "id": 0,
+      "ad": 0,
+      "image": "http://example.com"
+    }
+  ]
 }
 ```
 
@@ -317,10 +313,10 @@ message: string
 ```json
 {
   "id": 0,
-  "message": "string",
-  "timestamp": "2019-08-24T14:15:22Z",
   "conversation": 0,
-  "sender": 0
+  "message": "string",
+  "sender": 0,
+  "timestamp": "2019-08-24T14:15:22Z"
 }
 ```
 
@@ -329,6 +325,142 @@ message: string
 |Status|Meaning|Description|Schema|
 |---|---|---|---|
 |201|[Created](https://tools.ietf.org/html/rfc7231#section-6.3.2)|none|[Message](#schemamessage)|
+
+<aside class="warning">
+To perform this operation, you must be authenticated by means of one of the following methods:
+tokenAuth
+</aside>
+
+## api_messages_conversations_list
+
+<a id="opIdapi_messages_conversations_list"></a>
+
+> Code samples
+
+```shell
+# You can also use wget
+curl -X GET /api/messages/conversations \
+  -H 'Accept: application/json' \
+  -H 'Authorization: API_KEY'
+
+```
+
+```javascript
+
+const headers = {
+  'Accept':'application/json',
+  'Authorization':'API_KEY'
+};
+
+fetch('/api/messages/conversations',
+{
+  method: 'GET',
+
+  headers: headers
+})
+.then(function(res) {
+    return res.json();
+}).then(function(body) {
+    console.log(body);
+});
+
+```
+
+`GET /api/messages/conversations`
+
+> Example responses
+
+> 200 Response
+
+```json
+[
+  {
+    "id": 0,
+    "ad": {
+      "id": 0,
+      "title": "string",
+      "content": "string",
+      "date": "2019-08-24T14:15:22Z",
+      "modified": "2019-08-24T14:15:22Z",
+      "user": {
+        "id": 0,
+        "username": "string"
+      },
+      "price": "string",
+      "category": "IW",
+      "item": "string",
+      "images": [
+        {
+          "id": 0,
+          "ad": 0,
+          "image": "http://example.com"
+        }
+      ]
+    },
+    "initiator": {
+      "id": 0,
+      "username": "string"
+    },
+    "messages": [
+      {
+        "id": 0,
+        "conversation": 0,
+        "message": "string",
+        "sender": 0,
+        "timestamp": "2019-08-24T14:15:22Z"
+      }
+    ]
+  }
+]
+```
+
+<h3 id="api_messages_conversations_list-responses">Responses</h3>
+
+|Status|Meaning|Description|Schema|
+|---|---|---|---|
+|200|[OK](https://tools.ietf.org/html/rfc7231#section-6.3.1)|none|Inline|
+
+<h3 id="api_messages_conversations_list-responseschema">Response Schema</h3>
+
+Status Code **200**
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|*anonymous*|[[Conversation](#schemaconversation)]|false|none|none|
+|» id|integer|true|read-only|none|
+|» ad|[Ad](#schemaad)|true|read-only|none|
+|»» id|integer|true|read-only|none|
+|»» title|string|true|none|none|
+|»» content|string|true|none|none|
+|»» date|string(date-time)|true|read-only|none|
+|»» modified|string(date-time)|true|read-only|none|
+|»» user|[PublicUser](#schemapublicuser)|true|read-only|none|
+|»»» id|integer|true|read-only|none|
+|»»» username|string|true|none|Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.|
+|»» price|string(decimal)|true|none|none|
+|»» category|[CategoryEnum](#schemacategoryenum)|true|none|* `IW` - Items Wanted<br>* `IS` - Items for Sale<br>* `AS` - Academic Services|
+|»» item|string|true|none|none|
+|»» images|[[AdImage](#schemaadimage)]|true|read-only|none|
+|»»» id|integer|true|read-only|none|
+|»»» ad|integer|true|read-only|none|
+|»»» image|string(uri)|true|none|none|
+|» initiator|[PublicUser](#schemapublicuser)|true|read-only|none|
+|»» id|integer|true|read-only|none|
+|»» username|string|true|none|Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.|
+|» messages|[[Message](#schemamessage)]|true|read-only|none|
+|»» id|integer|true|read-only|none|
+|»» conversation|integer|true|read-only|none|
+|»» message|string|true|none|none|
+|»» sender|integer|true|read-only|none|
+|»» timestamp|string(date-time)|true|read-only|none|
+
+#### Enumerated Values
+
+|Property|Value|
+|---|---|
+|category|IW|
+|category|IS|
+|category|AS|
 
 <aside class="warning">
 To perform this operation, you must be authenticated by means of one of the following methods:
@@ -520,21 +652,24 @@ tokenAuth, None
 ```json
 {
   "id": 0,
-  "images": [
-    {
-      "id": 0,
-      "image": "http://example.com",
-      "ad": 0
-    }
-  ],
   "title": "string",
   "content": "string",
   "date": "2019-08-24T14:15:22Z",
   "modified": "2019-08-24T14:15:22Z",
+  "user": {
+    "id": 0,
+    "username": "string"
+  },
   "price": "string",
   "category": "IW",
   "item": "string",
-  "user": 0
+  "images": [
+    {
+      "id": 0,
+      "ad": 0,
+      "image": "http://example.com"
+    }
+  ]
 }
 
 ```
@@ -544,15 +679,15 @@ tokenAuth, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |id|integer|true|read-only|none|
-|images|[[AdImage](#schemaadimage)]|false|none|none|
 |title|string|true|none|none|
 |content|string|true|none|none|
 |date|string(date-time)|true|read-only|none|
 |modified|string(date-time)|true|read-only|none|
+|user|[PublicUser](#schemapublicuser)|true|read-only|none|
 |price|string(decimal)|true|none|none|
 |category|[CategoryEnum](#schemacategoryenum)|true|none|* `IW` - Items Wanted<br>* `IS` - Items for Sale<br>* `AS` - Academic Services|
 |item|string|true|none|none|
-|user|integer|true|read-only|none|
+|images|[[AdImage](#schemaadimage)]|true|read-only|none|
 
 <h2 id="tocS_AdImage">AdImage</h2>
 <!-- backwards compatibility -->
@@ -564,8 +699,8 @@ tokenAuth, None
 ```json
 {
   "id": 0,
-  "image": "http://example.com",
-  "ad": 0
+  "ad": 0,
+  "image": "http://example.com"
 }
 
 ```
@@ -575,8 +710,8 @@ tokenAuth, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |id|integer|true|read-only|none|
-|image|string(uri)|true|none|none|
 |ad|integer|true|read-only|none|
+|image|string(uri)|true|none|none|
 
 <h2 id="tocS_AuthToken">AuthToken</h2>
 <!-- backwards compatibility -->
@@ -632,6 +767,63 @@ tokenAuth, None
 |*anonymous*|IS|
 |*anonymous*|AS|
 
+<h2 id="tocS_Conversation">Conversation</h2>
+<!-- backwards compatibility -->
+<a id="schemaconversation"></a>
+<a id="schema_Conversation"></a>
+<a id="tocSconversation"></a>
+<a id="tocsconversation"></a>
+
+```json
+{
+  "id": 0,
+  "ad": {
+    "id": 0,
+    "title": "string",
+    "content": "string",
+    "date": "2019-08-24T14:15:22Z",
+    "modified": "2019-08-24T14:15:22Z",
+    "user": {
+      "id": 0,
+      "username": "string"
+    },
+    "price": "string",
+    "category": "IW",
+    "item": "string",
+    "images": [
+      {
+        "id": 0,
+        "ad": 0,
+        "image": "http://example.com"
+      }
+    ]
+  },
+  "initiator": {
+    "id": 0,
+    "username": "string"
+  },
+  "messages": [
+    {
+      "id": 0,
+      "conversation": 0,
+      "message": "string",
+      "sender": 0,
+      "timestamp": "2019-08-24T14:15:22Z"
+    }
+  ]
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|integer|true|read-only|none|
+|ad|[Ad](#schemaad)|true|read-only|none|
+|initiator|[PublicUser](#schemapublicuser)|true|read-only|none|
+|messages|[[Message](#schemamessage)]|true|read-only|none|
+
 <h2 id="tocS_Message">Message</h2>
 <!-- backwards compatibility -->
 <a id="schemamessage"></a>
@@ -642,10 +834,10 @@ tokenAuth, None
 ```json
 {
   "id": 0,
-  "message": "string",
-  "timestamp": "2019-08-24T14:15:22Z",
   "conversation": 0,
-  "sender": 0
+  "message": "string",
+  "sender": 0,
+  "timestamp": "2019-08-24T14:15:22Z"
 }
 
 ```
@@ -655,10 +847,32 @@ tokenAuth, None
 |Name|Type|Required|Restrictions|Description|
 |---|---|---|---|---|
 |id|integer|true|read-only|none|
-|message|string|true|none|none|
-|timestamp|string(date-time)|true|read-only|none|
 |conversation|integer|true|read-only|none|
+|message|string|true|none|none|
 |sender|integer|true|read-only|none|
+|timestamp|string(date-time)|true|read-only|none|
+
+<h2 id="tocS_PublicUser">PublicUser</h2>
+<!-- backwards compatibility -->
+<a id="schemapublicuser"></a>
+<a id="schema_PublicUser"></a>
+<a id="tocSpublicuser"></a>
+<a id="tocspublicuser"></a>
+
+```json
+{
+  "id": 0,
+  "username": "string"
+}
+
+```
+
+### Properties
+
+|Name|Type|Required|Restrictions|Description|
+|---|---|---|---|---|
+|id|integer|true|read-only|none|
+|username|string|true|none|Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.|
 
 <h2 id="tocS_User">User</h2>
 <!-- backwards compatibility -->

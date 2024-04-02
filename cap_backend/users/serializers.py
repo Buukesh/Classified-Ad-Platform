@@ -4,6 +4,13 @@ from rest_framework import serializers
 UserModel = get_user_model()
 
 
+# this is for hiding private info
+class PublicUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserModel
+        fields = ("id", "username")
+
+
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True)
 
