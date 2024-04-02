@@ -53,7 +53,7 @@ const SignupPage = () => {
                             type="email"
                             id="email"
                             name="email"
-                            className="input w-full max-w-xs"
+                            className="input input-bordered input-primary w-full max-w-xs"
                             placeholder="name@torontomu.ca"
                             required
                         />
@@ -66,7 +66,7 @@ const SignupPage = () => {
                             type="password"
                             id="password"
                             name="password"
-                            className="input w-full max-w-xs"
+                            className="input input-bordered input-primary w-full max-w-xs"
                             placeholder="••••••••"
                             required
                             onChange={handleChange}
