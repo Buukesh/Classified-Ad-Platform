@@ -59,7 +59,7 @@ const LoginPage = () => {
                             type="email"
                             id="email"
                             name="email"
-                            className="input w-full max-w-xs"
+                            className="input input-bordered w-full max-w-xs"
                             placeholder="name@torontomu.ca"
                             required
                             onChange={handleChange}
@@ -73,7 +73,7 @@ const LoginPage = () => {
                             type="password"
                             id="password"
                             name="password"
-                            className="input w-full max-w-xs"
+                            className="input input-bordered w-full max-w-xs"
                             placeholder="••••••••"
                             required
                             onChange={handleChange}
