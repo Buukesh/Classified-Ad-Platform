@@ -78,7 +78,7 @@ const SignupPage = () => {
                         )}
                     </div>
                     <div className="card-actions justify-center">
-                        <button className="btn btn-primary">Sign in</button>
+                        <button className="btn btn-primary">Sign up</button>
                     </div>
                     <p className="text-sm font-light text-gray-500 dark:text-gray-400">
                         Already have an account?{" "}
