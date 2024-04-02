@@ -89,3 +89,11 @@ Authorization: Token dbdef7e2cd08847828130c4c5948ca3182aab984
     "ad_id": 1,
     "message": "test"
 }
+
+### -----------------------------------------------------------------
+
+# list messages for user with token
+
+GET http://127.0.0.1:8000/api/messages/conversations
+Content-Type: application/json
+Authorization: Token dbdef7e2cd08847828130c4c5948ca3182aab984

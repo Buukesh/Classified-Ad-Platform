@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from users.serializers import PublicUserSerializer
 
 from .models import Ad, AdImage
 
@@ -6,17 +7,29 @@ from .models import Ad, AdImage
 class AdImageSerializer(serializers.ModelSerializer):
     class Meta:
         model = AdImage
-        fields = "__all__"
+        fields = ("id", "ad", "image")
         # the ad serializer creates the ad
         read_only_fields = ("ad",)
 
 
 class AdSerializer(serializers.ModelSerializer):
-    images = AdImageSerializer(many=True, required=False)
+    images = AdImageSerializer(many=True, required=False, read_only=True)
+    user = PublicUserSerializer(read_only=True)
 
     class Meta:
         model = Ad
-        fields = "__all__"
+        fields = (
+            "id",
+            "title",
+            "content",
+            "date",
+            "modified",
+            "user",
+            "price",
+            "category",
+            "item",
+            "images",
+        )
         # the user serializer creates this so not needed
         read_only_fields = ("user",)
 
