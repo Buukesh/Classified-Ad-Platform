@@ -97,7 +97,7 @@ const SignupPage = () => {
                                 id="password"
                                 name="password"
                                 className="input input-bordered input-primary  w-full max-w-xs"
-                                placeholder="••••••••"
+                                placeholder="Enter password"
                                 required
                                 onChange={handleChange}
                             />
