@@ -2,6 +2,7 @@ import { useState } from "react";
 
 import NavBar from "../components/Navbar.jsx";
 import PhotoUpload from "../components/PhotoUpload.jsx";
+import useAuthCheck from "../hooks/useAuthCheck.js";
 
 const NewPostPage = () => {
     const [adTitle, setAdTitle] = useState("");
@@ -12,6 +13,8 @@ const NewPostPage = () => {
 
     const isFormValid =
         adTitle && adItem && adContent && price && category !== "default";
+
+    useAuthCheck();
 
     return (
         <section>
