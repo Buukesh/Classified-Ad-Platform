@@ -5,19 +5,18 @@ import { useNavigate } from "react-router-dom";
 import AdList from "../components/AdList.jsx";
 import NavBar from "../components/Navbar.jsx";
 import SearchBar from "../components/SearchBar.jsx";
-import useAppContext from "../context/useAppContext";
 
 const HomePage = () => {
-    const { token } = useAppContext();
     const navigate = useNavigate();
 
     useEffect(() => {
         // this runs when homepage loads
+        const token = localStorage.getItem("token");
         if (!token) {
             // if token not set (not logged in), go to signup
             navigate("/signup");
         }
-    }, [token, navigate]);
+    }, [navigate]);
 
     return (
         <section className="bg-black-800">
