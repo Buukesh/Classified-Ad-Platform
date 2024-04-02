@@ -131,7 +131,7 @@ const SignupPage = () => {
                     </div>
                     <div className="card-actions justify-center">
                         <button
-                            className="btn btn-secondary"
+                            className="btn btn-primary"
                             disabled={!isFormValid()}
                         >
                             Sign up
