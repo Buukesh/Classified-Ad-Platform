@@ -23,6 +23,7 @@ class Ad(models.Model):
 
 
 class AdImage(models.Model):
-    ad = models.ForeignKey(Ad, on_delete=models.CASCADE)
+    # related name for later access
+    ad = models.ForeignKey(Ad, on_delete=models.CASCADE, related_name="images")
     # this is a subfolder, so path is media/ad_images/
     image = models.ImageField(upload_to="ad_images/")

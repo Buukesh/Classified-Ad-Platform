@@ -15,7 +15,9 @@ class Conversation(models.Model):
 
 
 class Message(models.Model):
-    conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE)
+    conversation = models.ForeignKey(
+        Conversation, on_delete=models.CASCADE, related_name="messages"
+    )
     message = models.TextField()
     sender = models.ForeignKey(UserModel, on_delete=models.CASCADE)
     timestamp = models.DateTimeField(auto_now_add=True)

@@ -17,7 +17,7 @@ class MessageSerializer(serializers.ModelSerializer):
 
 class ConversationSerializer(serializers.ModelSerializer):
     initiator = PublicUserSerializer(read_only=True)
-    messages = MessageSerializer(source="message_set", many=True, read_only=True)
+    messages = MessageSerializer(many=True, read_only=True)
     ad = AdSerializer(read_only=True)
 
     class Meta:

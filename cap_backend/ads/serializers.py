@@ -13,7 +13,7 @@ class AdImageSerializer(serializers.ModelSerializer):
 
 
 class AdSerializer(serializers.ModelSerializer):
-    images = AdImageSerializer(many=True, required=False, read_only=True)
+    images = AdImageSerializer(many=True, read_only=True)
     user = PublicUserSerializer(read_only=True)
 
     class Meta:
