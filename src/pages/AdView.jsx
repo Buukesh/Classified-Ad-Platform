@@ -10,18 +10,6 @@ const AdView = () => {
 
     const ad = location.state;
 
-    const images = [
-        {
-            src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg/800px-Casio_calculator_JS-20WK_in_201901_002.jpg",
-        },
-        {
-            src: "https://m.media-amazon.com/images/I/71rcveD-Q3L._AC_UF1000,1000_QL80_.jpg",
-        },
-        {
-            src: "https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg",
-        },
-        // Example images
-    ];
     return (
         <section>
             <NavBar />
@@ -34,7 +22,7 @@ const AdView = () => {
                         </p>
                         <p>{ad.content}</p>
 
-                        <PhotoCarousel images={images} />
+                        <PhotoCarousel images={ad.images} />
 
                         <p>Posted: {formatDate(ad.date)}</p>
                         <p>Modified: {formatDate(ad.modified)}</p>
