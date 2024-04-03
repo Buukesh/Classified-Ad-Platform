@@ -5,9 +5,12 @@ from .models import Ad, AdImage
 
 
 class AdImageSerializer(serializers.ModelSerializer):
+    # rename image to src in response
+    src = serializers.ImageField(source="image")
+
     class Meta:
         model = AdImage
-        fields = ("id", "ad", "image")
+        fields = ("id", "ad", "src")
         # the ad serializer creates the ad
         read_only_fields = ("ad",)
 
