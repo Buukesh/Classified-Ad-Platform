@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../components/Navbar";
 import PhotoCarousel from "../components/PhotoCarousel";
 
-const AdView = ({ title, description, price }) => {
+const AdView = ({ title, description, price, username }) => {
     const images = [
         {
             src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg/800px-Casio_calculator_JS-20WK_in_201901_002.jpg",
@@ -26,6 +26,7 @@ const AdView = ({ title, description, price }) => {
                             $100 (Sample)
                         </p>
                         <PhotoCarousel images={images} />
+                        <h3>Posted by: username</h3>
                         <p>This is where your description would be.</p>
                     </div>
                 </div>
