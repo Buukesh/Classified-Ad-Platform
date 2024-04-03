@@ -1,11 +1,32 @@
 import React, { useState } from "react";
 
-const SearchBar = () => {
+//export var currentCategory = "";
+
+const SearchBar = ({setSearchInput}) => {
     const [category, setCategory] = useState("");
+    const [content, setContent] = useState("");
 
     const handleCategoryChange = (e) => {
         setCategory(e.target.value);
     };
+
+    const handleContentChange = (e) => {
+        setContent(e.target.value);
+    }
+
+    // Send the Category and Search Box Text to the AdList
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (category === "All Categories") {
+            setSearchInput({type: "ALL", content: content});
+        } else if (category === "Items Wanted") {
+            setSearchInput({type: "IW", content: content});
+        } else if (category === "Items for Sale") {
+            setSearchInput({type: "IS", content: content});
+        } else if (category === "Academic Services") {
+            setSearchInput({type: "AS", content: content});
+        }
+    }
 
     return (
         <div className="flex justify-center">
@@ -14,6 +35,7 @@ const SearchBar = () => {
                     id="searchInput"
                     className="input input-bordered input-primary join-item bg-base-200 rounded-none"
                     placeholder="Search"
+                    onChange={handleContentChange}
                 />
 
                 <select
@@ -31,7 +53,10 @@ const SearchBar = () => {
                     <option value="Academic Services">Academic Services</option>
                 </select>
 
-                <button className="btn btn-primary join-item ">Search</button>
+                <button 
+                    className="btn btn-primary join-item "
+                    onClick={handleSubmit}
+                >Search</button>
             </div>
         </div>
     );
