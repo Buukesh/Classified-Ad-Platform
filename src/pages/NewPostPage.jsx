@@ -16,6 +16,13 @@ const NewPostPage = () => {
 
     useAuthCheck();
 
+    // Prevent price greater than 5 digits
+    const handleKeyPress = (e) => {
+        if (price.length >= 5) {
+            e.preventDefault();
+        }
+    };
+
     return (
         <section>
             <NavBar />
@@ -79,6 +86,7 @@ const NewPostPage = () => {
                                     required
                                     value={price}
                                     onChange={(e) => setPrice(e.target.value)}
+                                    onKeyPress={handleKeyPress}
                                 />
                             </div>
                         </div>
