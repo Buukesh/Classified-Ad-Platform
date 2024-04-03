@@ -5,15 +5,18 @@ from .models import Ad, AdImage
 
 
 class AdImageSerializer(serializers.ModelSerializer):
+    # rename image to src in response
+    src = serializers.ImageField(source="image")
+
     class Meta:
         model = AdImage
-        fields = ("id", "ad", "image")
+        fields = ("id", "ad", "src")
         # the ad serializer creates the ad
         read_only_fields = ("ad",)
 
 
 class AdSerializer(serializers.ModelSerializer):
-    images = AdImageSerializer(many=True, required=False, read_only=True)
+    images = AdImageSerializer(many=True, read_only=True)
     user = PublicUserSerializer(read_only=True)
 
     class Meta:

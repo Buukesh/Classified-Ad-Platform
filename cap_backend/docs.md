@@ -86,7 +86,7 @@ fetch('/api/ads',
       {
         "id": 0,
         "ad": 0,
-        "image": "http://example.com"
+        "src": "http://example.com"
       }
     ]
   }
@@ -120,7 +120,7 @@ Status Code **200**
 |» images|[[AdImage](#schemaadimage)]|true|read-only|none|
 |»» id|integer|true|read-only|none|
 |»» ad|integer|true|read-only|none|
-|»» image|string(uri)|true|none|none|
+|»» src|string(uri)|true|none|none|
 
 #### Enumerated Values
 
@@ -229,7 +229,7 @@ item: string
     {
       "id": 0,
       "ad": 0,
-      "image": "http://example.com"
+      "src": "http://example.com"
     }
   ]
 }
@@ -393,7 +393,7 @@ fetch('/api/messages/conversations',
         {
           "id": 0,
           "ad": 0,
-          "image": "http://example.com"
+          "src": "http://example.com"
         }
       ]
     },
@@ -443,7 +443,7 @@ Status Code **200**
 |»» images|[[AdImage](#schemaadimage)]|true|read-only|none|
 |»»» id|integer|true|read-only|none|
 |»»» ad|integer|true|read-only|none|
-|»»» image|string(uri)|true|none|none|
+|»»» src|string(uri)|true|none|none|
 |» initiator|[PublicUser](#schemapublicuser)|true|read-only|none|
 |»» id|integer|true|read-only|none|
 |»» username|string|true|none|Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.|
@@ -667,7 +667,7 @@ tokenAuth, None
     {
       "id": 0,
       "ad": 0,
-      "image": "http://example.com"
+      "src": "http://example.com"
     }
   ]
 }
@@ -700,7 +700,7 @@ tokenAuth, None
 {
   "id": 0,
   "ad": 0,
-  "image": "http://example.com"
+  "src": "http://example.com"
 }
 
 ```
@@ -711,7 +711,7 @@ tokenAuth, None
 |---|---|---|---|---|
 |id|integer|true|read-only|none|
 |ad|integer|true|read-only|none|
-|image|string(uri)|true|none|none|
+|src|string(uri)|true|none|none|
 
 <h2 id="tocS_AuthToken">AuthToken</h2>
 <!-- backwards compatibility -->
@@ -794,7 +794,7 @@ tokenAuth, None
       {
         "id": 0,
         "ad": 0,
-        "image": "http://example.com"
+        "src": "http://example.com"
       }
     ]
   },
