@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 
 import Ad from "./Ad";
+
 import { fetchData } from "../../utils";
 
-const AdList = () => {
+const AdList = ({searchInput}) => {
     const [ads, setAds] = useState([]);
 
     useEffect(() => {
@@ -11,21 +12,22 @@ const AdList = () => {
             const data = await fetchData("/api/ads");
             setAds(data);
         };
-
         getAds();
     }, []);
 
     return (
         <div>
             {ads.map((ad) => (
-                // Spacing between ads
-                <div key={ad.id} className="mb-5">
+                // spacing between ads
+                (ad.category === searchInput.type || searchInput.type === "ALL") && ((ad.title).toUpperCase().includes((searchInput.content).toUpperCase()) || searchInput === "") ?
+                (<div key={ad.id} className="mb-5">
                     <Ad
                         key={ad.id}
                         ad={ad}
                         imgSrc={"https://placehold.co/200"}
                     />
-                </div>
+                </div>)
+                : null
             ))}
         </div>
     );
