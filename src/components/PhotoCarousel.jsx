@@ -17,14 +17,14 @@ const PhotoCarousel = ({ images }) => {
 
     return (
         <section>
-            <div className="carousel w-full">
+            <div className="carousel w-full h-[40rem]">
                 <div
                     key={activeSlide}
-                    className={`carousel-item relative w-full`}
+                    className={`carousel-item relative w-full flex items-center justify-center`}
                 >
                     <img
                         src={images[activeSlide].src}
-                        className="w-full"
+                        className="w-[25rem] h-auto"
                         alt={`Slide ${activeSlide + 1}`}
                     />
 

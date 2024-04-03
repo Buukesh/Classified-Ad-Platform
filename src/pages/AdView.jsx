@@ -5,10 +5,10 @@ import PhotoCarousel from "../components/PhotoCarousel";
 const AdView = ({ title, description, price }) => {
     const images = [
         {
-            src: "https://daisyui.com/images/stock/photo-1609621838510-5ad474b7d25d.jpg",
+            src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg/800px-Casio_calculator_JS-20WK_in_201901_002.jpg",
         },
         {
-            src: "https://daisyui.com/images/stock/photo-1414694762283-acccc27bca85.jpg",
+            src: "https://m.media-amazon.com/images/I/71rcveD-Q3L._AC_UF1000,1000_QL80_.jpg",
         },
         {
             src: "https://daisyui.com/images/stock/photo-1665553365602-b2fb8e5d1707.jpg",
