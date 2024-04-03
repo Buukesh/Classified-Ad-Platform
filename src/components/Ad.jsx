@@ -8,7 +8,7 @@ const Ad = ({ ad, imgSrc }) => {
     return (
         <div className="flex justify-center">
             <div className="card lg:card-side shadow-xl w-1/2 lg:w-1/2">
-                <img src={imgSrc} />
+                <img src={imgSrc} className="h-full" />
 
                 <div className="absolute top-2 right-2 bg-secondary px-1 py-1 rounded-full">
                     <span className="text-lg font-semibold text-white">

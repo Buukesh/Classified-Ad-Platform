@@ -18,7 +18,7 @@ const AdList = () => {
     return (
         <div>
             {ads.map((ad) => (
-                // spacing between ads
+                // Spacing between ads
                 <div key={ad.id} className="mb-5">
                     <Ad
                         key={ad.id}
