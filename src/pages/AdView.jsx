@@ -1,8 +1,15 @@
-import React from "react";
+import { useLocation } from "react-router-dom";
+
+import { formatDate } from "../../utils";
 import NavBar from "../components/Navbar";
 import PhotoCarousel from "../components/PhotoCarousel";
+import { Category } from "../constants";
 
-const AdView = ({ title, description, price, username }) => {
+const AdView = () => {
+    const location = useLocation();
+
+    const ad = location.state;
+
     const images = [
         {
             src: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cf/Casio_calculator_JS-20WK_in_201901_002.jpg/800px-Casio_calculator_JS-20WK_in_201901_002.jpg",
@@ -21,13 +28,19 @@ const AdView = ({ title, description, price, username }) => {
             <div className="flex justify-center my-10">
                 <div className="card w-[70rem] bg-base-200 shadow-xl">
                     <div className="card-body">
-                        <h2 className="text-3xl font-bold mb-5">Title</h2>
+                        <h2 className="text-3xl font-bold mb-5">{ad.title}</h2>
                         <p className="text-2xl font-semibold text-primary mb-5">
-                            $100 (Sample)
+                            {`$${ad.price}`}
                         </p>
+                        <p>{ad.content}</p>
+
                         <PhotoCarousel images={images} />
-                        <h3>Posted by: username</h3>
-                        <p>This is where your description would be.</p>
+
+                        <p>Posted: {formatDate(ad.date)}</p>
+                        <p>Modified: {formatDate(ad.modified)}</p>
+                        <p>Category: {Category[ad.category]}</p>
+                        <p>Seller: {ad.user.username}</p>
+                        <p>Item: {ad.item}</p>
                     </div>
                 </div>
             </div>
