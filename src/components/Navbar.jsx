@@ -8,6 +8,10 @@ const NavBar = () => {
         navigate("/login");
     };
 
+    const goToMessagesPage = () => {
+        navigate("/messages");
+    };
+
     return (
         <div className="navbar bg-base-200">
             <div className="navbar-start">
@@ -61,7 +65,7 @@ const NavBar = () => {
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <a href="#" className="btn">
+                        <a className="btn" onClick={goToMessagesPage}>
                             Messages
                         </a>
                     </li>

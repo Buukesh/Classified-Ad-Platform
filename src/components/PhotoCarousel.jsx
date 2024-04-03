@@ -28,20 +28,22 @@ const PhotoCarousel = ({ images }) => {
                         alt={`Slide ${activeSlide + 1}`}
                     />
 
-                    <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
-                        <button
-                            className="btn btn-primary btn-circle"
-                            onClick={prevSlide}
-                        >
-                            ❮
-                        </button>
-                        <button
-                            className="btn btn-primary btn-circle"
-                            onClick={nextSlide}
-                        >
-                            ❯
-                        </button>
-                    </div>
+                    {images.length > 1 && ( // Conditionally render navigation buttons
+                        <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
+                            <button
+                                className="btn btn-primary btn-circle"
+                                onClick={prevSlide}
+                            >
+                                ❮
+                            </button>
+                            <button
+                                className="btn btn-primary btn-circle"
+                                onClick={nextSlide}
+                            >
+                                ❯
+                            </button>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>
