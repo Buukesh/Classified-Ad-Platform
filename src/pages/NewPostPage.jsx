@@ -16,10 +16,16 @@ const NewPostPage = () => {
 
     useAuthCheck();
 
-    // Prevent price greater than 5 digits
-    const handleKeyPress = (e) => {
-        if (price.length >= 5) {
-            e.preventDefault();
+    const handleChange = (e) => {
+        const inputValue = e.target.value;
+        // Ensure the input value is a number and within the range of 0 to 99999
+        if (
+            inputValue === "" ||
+            (/^\d*$/.test(inputValue) &&
+                parseInt(inputValue, 10) >= 0 &&
+                parseInt(inputValue, 10) <= 99999)
+        ) {
+            setPrice(inputValue);
         }
     };
 
@@ -77,16 +83,16 @@ const NewPostPage = () => {
                             </label>
                             <div>
                                 <input
-                                    type="number"
+                                    type="text"
                                     id="price"
                                     name="price"
                                     className="input input-bordered input-primary w-full max-w-xs"
                                     placeholder="Enter Price"
                                     min="0"
+                                    max="99999"
                                     required
                                     value={price}
-                                    onChange={(e) => setPrice(e.target.value)}
-                                    onKeyPress={handleKeyPress}
+                                    onChange={handleChange}
                                 />
                             </div>
                         </div>
