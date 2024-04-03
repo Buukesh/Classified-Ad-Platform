@@ -1,10 +1,11 @@
 import { useState, useEffect } from "react";
 
-import Ad from "./Ad";
+import PropTypes from "prop-types";
 
+import Ad from "./Ad";
 import { fetchData } from "../../utils";
 
-const AdList = ({searchInput}) => {
+const AdList = ({ searchInput }) => {
     const [ads, setAds] = useState([]);
 
     useEffect(() => {
@@ -17,20 +18,25 @@ const AdList = ({searchInput}) => {
 
     return (
         <div>
-            {ads.map((ad) => (
+            {ads.map((ad) =>
                 // spacing between ads
-                (ad.category === searchInput.type || searchInput.type === "ALL") && ((ad.title).toUpperCase().includes((searchInput.content).toUpperCase()) || searchInput === "") ?
-                (<div key={ad.id} className="mb-5">
-                    <Ad
-                        key={ad.id}
-                        ad={ad}
-                        imgSrc={"https://placehold.co/200"}
-                    />
-                </div>)
-                : null
-            ))}
+                (ad.category === searchInput.type ||
+                    searchInput.type === "ALL") &&
+                (ad.title
+                    .toUpperCase()
+                    .includes(searchInput.content.toUpperCase()) ||
+                    searchInput === "") ? (
+                    <div key={ad.id} className="mb-5">
+                        <Ad key={ad.id} ad={ad} />
+                    </div>
+                ) : null
+            )}
         </div>
     );
+};
+
+AdList.propTypes = {
+    searchInput: PropTypes.object.isRequired,
 };
 
 export default AdList;

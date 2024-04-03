@@ -55,3 +55,7 @@ Or `.\make_docs.bat`
 ## API Documentation
 
 [Documentation](cap_backend/docs.md)
+
+## Known issues
+
+Images don't load on Firefox browser
