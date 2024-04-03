@@ -58,7 +58,7 @@ const NavBar = () => {
                     </li>
                 </ul>
             </div>
-            <div className="navbar-end hidden lg:flex">
+            <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
                     <li>
                         <a href="#" className="btn">
