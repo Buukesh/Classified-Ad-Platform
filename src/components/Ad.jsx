@@ -4,7 +4,7 @@ import AdView from "../pages/AdView";
 
 const Ad = ({ imgSrc, title, description, price }) => {
     return (
-        <Link to="/adview" className="flex justify-center">
+        <div className="flex justify-center">
             <div className="card lg:card-side shadow-xl w-1/2 lg:w-1/2">
                 <img src={imgSrc} />
 
@@ -15,12 +15,14 @@ const Ad = ({ imgSrc, title, description, price }) => {
                     </span>
                 </div>
 
-                <div className="card-body bg-base-200">
-                    <h2 className="card-title">{title}</h2>
-                    <p>{description}</p>
-                </div>
+                <Link to="/adview" className="w-full flex flex-col">
+                    <div className="card-body bg-base-200">
+                        <h2 className="card-title">{title}</h2>
+                        <p>{description}</p>
+                    </div>
+                </Link>
             </div>
-        </Link>
+        </div>
     );
 };
 
