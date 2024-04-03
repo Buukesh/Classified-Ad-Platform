@@ -1,11 +1,20 @@
 import { useState } from "react";
 
+import { useNavigate } from "react-router-dom";
+
+import { postData } from "../../utils";
+
 const SignupPage = () => {
     const [formData, setFormData] = useState({
         username: "",
         email: "",
         password: "",
     });
+
+    const [isLoading, setIsLoading] = useState(false);
+
+    const navigate = useNavigate();
+
     const [passwordError, setPasswordError] = useState("");
     const [emailError, setEmailError] = useState("");
     const [showPassword, setShowPassword] = useState(false);
@@ -55,6 +64,33 @@ const SignupPage = () => {
             !emailError &&
             !passwordError
         );
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        // when this boolean is set, a loading animation will show
+        setIsLoading(true);
+        // creates the user data and POSTS it to the backend
+        const data = await postData("/api/users", {
+            username: formData.username,
+            email: formData.email,
+            password: formData.password,
+        });
+
+        // creates the token for Log in and to save into local storage
+        const dataToken = await postData("/api/token", {
+            username: formData.username,
+            password: formData.password,
+        });
+
+        setIsLoading(false);
+
+        // save to local storage so it stays after refresh
+        localStorage.setItem("token", dataToken.token);
+
+        // go to homepage after logging in
+        navigate("/");
     };
 
     const toggleShowPassword = () => {
@@ -148,6 +184,7 @@ const SignupPage = () => {
                         <button
                             className="btn btn-primary"
                             disabled={!isFormValid()}
+                            onClick={handleSubmit}
                         >
                             Sign up
                         </button>
