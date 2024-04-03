@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+
 import Ad from "./Ad";
 import { fetchData } from "../../utils";
 
@@ -16,14 +17,13 @@ const AdList = () => {
 
     return (
         <div>
-            {ads.map((ad, idx) => (
+            {ads.map((ad) => (
                 // spacing between ads
-                <div key={idx} className="mb-5">
+                <div key={ad.id} className="mb-5">
                     <Ad
-                        key={idx}
+                        key={ad.id}
+                        ad={ad}
                         imgSrc={"https://placehold.co/200"}
-                        title={ad.title}
-                        description={ad.content}
                     />
                 </div>
             ))}

@@ -1,24 +1,38 @@
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-import AdView from "../pages/AdView";
 
-const Ad = ({ imgSrc, title, description, price }) => {
+import { formatDate } from "../../utils";
+import { Category } from "../constants";
+
+const Ad = ({ ad, imgSrc }) => {
     return (
         <div className="flex justify-center">
             <div className="card lg:card-side shadow-xl w-1/2 lg:w-1/2">
                 <img src={imgSrc} />
 
                 <div className="absolute top-2 right-2 bg-secondary px-1 py-1 rounded-full">
-                    {/* Currently using sample price */}
                     <span className="text-lg font-semibold text-white">
-                        {"$100 (Sample)"}
+                        {`$${ad.price}`}
                     </span>
                 </div>
 
-                <Link to="/adview" className="w-full flex flex-col">
+                {/* dynamic link using ad id */}
+                <Link
+                    to={`/adview/${ad.id}`}
+                    state={ad}
+                    className="w-full flex flex-col"
+                >
                     <div className="card-body bg-base-200">
-                        <h2 className="card-title">{title}</h2>
-                        <p>{description}</p>
+                        <h2 className="card-title">{ad.title}</h2>
+                        <p>{ad.content}</p>
+
+                        <div className="divider" />
+
+                        <div className="text-sm">
+                            <p>Posted: {formatDate(ad.date)}</p>
+                            <p>Category: {Category[ad.category]}</p>
+                            <p>Seller: {ad.user.username}</p>
+                        </div>
                     </div>
                 </Link>
             </div>
@@ -28,9 +42,7 @@ const Ad = ({ imgSrc, title, description, price }) => {
 
 Ad.propTypes = {
     imgSrc: PropTypes.string,
-    title: PropTypes.string.isRequired,
-    description: PropTypes.string.isRequired,
-    price: PropTypes.string,
+    ad: PropTypes.object.isRequired,
 };
 
 export default Ad;

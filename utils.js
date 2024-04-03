@@ -1,39 +1,44 @@
 export const fetchData = async (url, headers = {}) => {
-  try {
-    const response = await fetch(url, {
-      headers: { "Content-Type": "application/json", ...headers },
-    });
-    const data = await response.json();
-    if (!response.ok) {
-      console.log(`HTTP error: ${response.status}`);
-      console.log(data);
-      return;
-    }
+    try {
+        const response = await fetch(url, {
+            headers: { "Content-Type": "application/json", ...headers },
+        });
+        const data = await response.json();
+        if (!response.ok) {
+            console.log(`HTTP error: ${response.status}`);
+            console.log(data);
+            return;
+        }
 
-    return data;
-  } catch (e) {
-    console.error("Error fetching data:", e);
-  }
+        return data;
+    } catch (e) {
+        console.error("Error fetching data:", e);
+    }
 };
 
 export const postData = async (url, body = {}, headers = {}) => {
-  const options = {
-    method: "POST",
-    headers: { "Content-Type": "application/json", ...headers },
-    body: JSON.stringify(body),
-  };
+    const options = {
+        method: "POST",
+        headers: { "Content-Type": "application/json", ...headers },
+        body: JSON.stringify(body),
+    };
 
-  try {
-    const response = await fetch(url, options);
-    const data = await response.json();
-    if (!response.ok) {
-      console.log(`HTTP error: ${response.status}`);
-      console.log(data);
-      return;
+    try {
+        const response = await fetch(url, options);
+        const data = await response.json();
+        if (!response.ok) {
+            console.log(`HTTP error: ${response.status}`);
+            console.log(data);
+            return;
+        }
+
+        return data;
+    } catch (e) {
+        console.error("Error posting data:", e);
     }
+};
 
-    return data;
-  } catch (e) {
-    console.error("Error posting data:", e);
-  }
+export const formatDate = (date) => {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    return new Date(date).toLocaleDateString(undefined, options);
 };
