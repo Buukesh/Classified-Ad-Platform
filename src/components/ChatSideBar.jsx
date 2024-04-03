@@ -24,8 +24,8 @@ const ChatSideBar = ({ sidebarItems }) => {
                         className="drawer-overlay"
                     ></label>
                     <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content">
-                        {sidebarItems.map((item, index) => (
-                            <li key={index}>
+                        {sidebarItems.map((item, idx) => (
+                            <li key={idx}>
                                 <a>{item}</a>
                             </li>
                         ))}
