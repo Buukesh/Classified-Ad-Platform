@@ -31,15 +31,17 @@ const Ad = ({ ad }) => {
                     className="w-full flex flex-col"
                 >
                     <div className="card-body bg-base-200">
-                        <h2 className="card-title">{ad.title}</h2>
-                        <p>{ad.content}</p>
+                        <div className="my-4">
+                            <h2 className="card-title">{ad.title}</h2>
+                            <p>{ad.content}</p>
 
-                        <div className="divider" />
+                            <div className="divider" />
 
-                        <div className="text-sm">
-                            <p>Posted: {formatDate(ad.date)}</p>
-                            <p>Category: {Category[ad.category]}</p>
-                            <p>Seller: {ad.user.username}</p>
+                            <div className="text-sm">
+                                <p>Posted: {formatDate(ad.date)}</p>
+                                <p>Category: {Category[ad.category]}</p>
+                                <p>Seller: {ad.user.username}</p>
+                            </div>
                         </div>
                     </div>
                 </Link>
