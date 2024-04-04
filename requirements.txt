@@ -2,3 +2,5 @@ django
 djangorestframework
 drf-spectacular
 pillow
+channels
+daphne

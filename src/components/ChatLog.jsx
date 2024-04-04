@@ -11,7 +11,7 @@ const ChatLog = ({ messages }) => {
                     }`}
                 >
                     <div className="chat-bubble max-w-[50%]">
-                        {message.text}
+                        {message.message}
                     </div>
                 </div>
             ))}
