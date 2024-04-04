@@ -49,7 +49,12 @@ const NavBar = () => {
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl" href="/">
-                    TMU
+                <img
+                        src="https://www.torontomu.ca/content/dam/brand/global/images/visual-guide/tmu-logo-social-media.jpg"
+                        alt="Image"
+                        style={{ width: '45px', height: '45px' }}
+                        className="mb-4 rounded-lg w-24 h-24 mx-auto"
+                    />
                 </a>
             </div>
             <div className="navbar-center hidden lg:flex">
