@@ -7,14 +7,14 @@ const PhotoCarousel = ({ images }) => {
         setActiveSlide((prevSlide) =>
             prevSlide === images.length - 1 ? 0 : prevSlide + 1
         );
-        console.log(prevSlide);
+        
     };
 
     const prevSlide = () => {
         setActiveSlide((prevSlide) =>
             prevSlide === 0 ? images.length - 1 : prevSlide - 1
         );
-        console.log(prevSlide);
+        
     };
 
     return (
@@ -27,7 +27,7 @@ const PhotoCarousel = ({ images }) => {
                     <img
                         src={images[activeSlide].src}
                         className="w-[25rem] h-auto"
-                        alt={`Slide ${activeSlide}`}
+                        alt={`Slide ${activeSlide + 1}`}
                     />
 
                     {images.length > 1 && ( // Conditionally render navigation buttons
