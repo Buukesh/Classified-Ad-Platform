@@ -12,7 +12,12 @@ const Ad = ({ ad }) => {
     return (
         <div className="flex justify-center">
             <div className="card lg:card-side shadow-xl w-1/2 lg:w-1/2">
-                <img src={thumbnail} className="h-full" />
+                <img
+                    src={thumbnail}
+                    className="object-cover h-full w-[200px]"
+                    alt="Thumbnail"
+                    style={{ objectPosition: "center center" }}
+                />
 
                 <div className="absolute top-2 right-2 bg-secondary px-1 py-1 rounded-full">
                     <span className="text-lg font-semibold text-white">
