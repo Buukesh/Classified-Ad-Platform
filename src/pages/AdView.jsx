@@ -23,7 +23,9 @@ const AdView = () => {
                         <p>{ad.content}</p>
 
                         <PhotoCarousel images={ad.images} />
-
+                        <button className="btn btn-primary btn-sm">
+                            Send message to {ad.user.username}
+                        </button>
                         <p>Posted: {formatDate(ad.date)}</p>
                         <p>Modified: {formatDate(ad.modified)}</p>
                         <p>Category: {Category[ad.category]}</p>
