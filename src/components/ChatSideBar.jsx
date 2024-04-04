@@ -1,6 +1,14 @@
 import React from "react";
+import ChatBox from "../components/ChatBox";
+import ChatLog from "../components/ChatLog";
 
 const ChatSideBar = ({ sidebarItems }) => {
+    const messages = [
+        { text: "Hello!", sender: "sender" },
+        { text: "Hi there!", sender: "receiver" },
+        { text: "How are you?", sender: "sender" },
+        { text: "I'm good, thanks!", sender: "receiver" },
+    ];
     return (
         <section>
             <div className="drawer lg:drawer-open">
@@ -9,13 +17,15 @@ const ChatSideBar = ({ sidebarItems }) => {
                     type="checkbox"
                     className="drawer-toggle"
                 />
-                <div className="drawer-content flex flex-col items-center justify-center">
+                <div className="drawer-content flex flex-col">
                     <label
                         htmlFor="my-drawer-2"
-                        className="btn btn-primary drawer-button lg:hidden"
+                        className="btn btn-primary drawer-button my-6 lg:hidden"
                     >
                         Open Conversations
                     </label>
+                    <ChatLog messages={messages} />
+                    <ChatBox />
                 </div>
                 <div className="drawer-side">
                     <label

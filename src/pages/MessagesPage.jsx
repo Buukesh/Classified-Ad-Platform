@@ -1,15 +1,18 @@
 import NavBar from "../components/Navbar";
 import ChatSideBar from "../components/ChatSideBar";
-import ChatBox from "../components/ChatBox";
 
 const MessagesPage = () => {
-    const sidebarItems = ["Sidebar Item 1", "Sidebar Item 2", "Sidebar Item 3"];
+    const userConversations = [
+        "Conversation 1",
+        "Conversation 2",
+        "Conversation 3",
+    ];
+
     return (
         <section>
             <NavBar />
             <div>
-                <ChatSideBar sidebarItems={sidebarItems} />
-                <ChatBox />
+                <ChatSideBar sidebarItems={userConversations} />
             </div>
         </section>
     );
