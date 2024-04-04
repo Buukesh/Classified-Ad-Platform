@@ -17,15 +17,8 @@ const SearchBar = ({setSearchInput}) => {
     // Send the Category and Search Box Text to the AdList
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (category === "All Categories") {
-            setSearchInput({type: "ALL", content: content});
-        } else if (category === "Items Wanted") {
-            setSearchInput({type: "IW", content: content});
-        } else if (category === "Items for Sale") {
-            setSearchInput({type: "IS", content: content});
-        } else if (category === "Academic Services") {
-            setSearchInput({type: "AS", content: content});
-        }
+        setSearchInput({type: category, content: content});
+        
     }
 
     return (
@@ -47,10 +40,10 @@ const SearchBar = ({setSearchInput}) => {
                     <option value="" disabled hidden>
                         All Categories
                     </option>
-                    <option value="All Categories">All Categories</option>
-                    <option value="Items Wanted">Items Wanted</option>
-                    <option value="Items for Sale">Items for Sale</option>
-                    <option value="Academic Services">Academic Services</option>
+                    <option value="ALL">All Categories</option>
+                    <option value="IW">Items Wanted</option>
+                    <option value="IS">Items for Sale</option>
+                    <option value="AS">Academic Services</option>
                 </select>
 
                 <button 
