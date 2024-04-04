@@ -2,13 +2,8 @@ import React from "react";
 import ChatBox from "../components/ChatBox";
 import ChatLog from "../components/ChatLog";
 
-const ChatSideBar = ({ sidebarItems }) => {
-    const messages = [
-        { text: "Hello!", sender: "sender" },
-        { text: "Hi there!", sender: "receiver" },
-        { text: "How are you?", sender: "sender" },
-        { text: "I'm good, thanks!", sender: "receiver" },
-    ];
+const ChatSideBar = ({ sidebarItems, messages }) => {
+
     return (
         <section>
             <div className="drawer lg:drawer-open">
