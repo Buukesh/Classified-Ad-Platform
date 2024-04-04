@@ -10,6 +10,11 @@ const AdView = () => {
 
     const ad = location.state;
 
+    const handleSendMessage = () => {
+        e.preventDefault();
+        console.log(`Sending message to ${ad.user.username}`);
+    };
+
     return (
         <section>
             <NavBar />
@@ -23,7 +28,10 @@ const AdView = () => {
                         <p>{ad.content}</p>
 
                         <PhotoCarousel images={ad.images} />
-                        <button className="btn btn-primary btn-sm">
+                        <button
+                            className="btn btn-primary btn-sm"
+                            onClick={handleSendMessage}
+                        >
                             Send message to {ad.user.username}
                         </button>
                         <p>Posted: {formatDate(ad.date)}</p>
