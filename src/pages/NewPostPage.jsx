@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 import NavBar from "../components/Navbar.jsx";
 import PhotoUpload from "../components/PhotoUpload.jsx";
 import useAuthCheck from "../hooks/useAuthCheck.js";
+import { postData } from "../../utils.js";
 
 const NewPostPage = () => {
     const [adTitle, setAdTitle] = useState("");
@@ -11,10 +13,15 @@ const NewPostPage = () => {
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("default");
 
+
+    const [isLoading, setIsLoading] = useState(false);
+
     const isFormValid =
         adTitle && adItem && adContent && price && category !== "default";
 
     useAuthCheck();
+
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const inputValue = e.target.value;
@@ -28,6 +35,22 @@ const NewPostPage = () => {
             setPrice(inputValue);
         }
     };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setIsLoading(true);
+
+        const data = await postData("/api/ads", {
+            title: adTitle,
+            item: adItem,
+            content: adContent,
+            price: price,
+            category: category,
+        }, {"Authorization": `Token ${localStorage.getItem("token")}`});
+
+        setIsLoading(false);
+        navigate("/");
+    }
 
     return (
         <section>
@@ -109,13 +132,13 @@ const NewPostPage = () => {
                                 <option value="default" disabled>
                                     Select Category
                                 </option>
-                                <option value="Items Wanted">
+                                <option value="IW">
                                     Items Wanted
                                 </option>
-                                <option value="Items for Sale">
+                                <option value="IS">
                                     Items for Sale
                                 </option>
-                                <option value="Academic Services">
+                                <option value="AS">
                                     Academic Services
                                 </option>
                             </select>
@@ -130,6 +153,7 @@ const NewPostPage = () => {
                             <button
                                 className="btn btn-primary"
                                 disabled={!isFormValid}
+                                onClick={handleSubmit}
                             >
                                 Create Post
                             </button>

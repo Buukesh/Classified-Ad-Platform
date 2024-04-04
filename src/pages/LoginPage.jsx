@@ -37,7 +37,7 @@ const LoginPage = () => {
 
         // save to local storage so it stays after refresh
         localStorage.setItem("token", data.token);
-
+        
         // go to homepage after logging in
         navigate("/");
     };

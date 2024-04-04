@@ -31,7 +31,6 @@ export const postData = async (url, body = {}, headers = {}) => {
             console.log(data);
             return;
         }
-
         return data;
     } catch (e) {
         console.error("Error posting data:", e);
