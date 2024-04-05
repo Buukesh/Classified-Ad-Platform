@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PhotoUpload = () => {
+const PhotoUpload = ({ onImagesChange }) => {
     const [files, setFiles] = useState([]);
     const [fileDragging, setFileDragging] = useState(null);
     const [fileDropping, setFileDropping] = useState(null);
@@ -18,6 +18,7 @@ const PhotoUpload = () => {
         const updatedFiles = [...files];
         updatedFiles.splice(index, 1);
         setFiles(updatedFiles);
+        onImagesChange(updatedFiles);
     };
 
     const handleDrop = (e) => {
@@ -29,6 +30,7 @@ const PhotoUpload = () => {
         updatedFiles.splice(fileDropping, 0, ...removed);
 
         setFiles(updatedFiles);
+        onImagesChange(updatedFiles);
         setFileDropping(null);
         setFileDragging(null);
     };
@@ -71,6 +73,7 @@ const PhotoUpload = () => {
             // No invalid files detected, add files to state
             const updatedFiles = [...files, ...fileList];
             setFiles(updatedFiles);
+            onImagesChange(updatedFiles)
         }
 
         // Clear the file input after processing files
