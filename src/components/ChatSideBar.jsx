@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
+
+import { fetchData } from "../../utils";
 import ChatBox from "../components/ChatBox";
 import ChatLog from "../components/ChatLog";
-import { fetchData } from "../../utils"; // Import the fetchData function
 
-const ChatSideBar = () => {
-    const [convos, setConvos] = useState([]);
-    const [currentConvo, setCurrentConvo] = useState(null); // Change initial state to null
-
+const ChatSideBar = ({
+    convos,
+    setConvos,
+    currentConvo,
+    setCurrentConvo,
+    sendMsg,
+}) => {
     useEffect(() => {
         const getConvos = async () => {
             const token = localStorage.getItem("token");
@@ -35,8 +39,12 @@ const ChatSideBar = () => {
                         Open Conversations
                     </label>
                     {/* Need to figure out how to get name of user */}
-                    <ChatLog messages={currentConvo ? currentConvo.messages : []} sender="sample_name" /> {/* Show messages if currentConvo is set */}
-                    <ChatBox />
+                    <ChatLog
+                        messages={currentConvo ? currentConvo.messages : []}
+                        sender="sample_name"
+                    />{" "}
+                    {/* Show messages if currentConvo is set */}
+                    <ChatBox sendMsg={sendMsg} />
                 </div>
                 <div className="drawer-side">
                     <label
@@ -47,7 +55,9 @@ const ChatSideBar = () => {
                     <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content">
                         {convos.map((convo) => (
                             <li key={convo.id}>
-                                <a onClick={() => setCurrentConvo(convo)}>{convo.ad.title}</a>
+                                <a onClick={() => setCurrentConvo(convo)}>
+                                    {convo.ad.title}
+                                </a>
                             </li>
                         ))}
                     </ul>
