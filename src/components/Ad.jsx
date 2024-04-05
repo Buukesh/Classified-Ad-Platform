@@ -33,7 +33,6 @@ const Ad = ({ ad }) => {
                     <div className="card-body bg-base-200">
                         <div className="my-4">
                             <h2 className="card-title">{ad.title}</h2>
-                            <p>{ad.content}</p>
 
                             <div className="divider" />
 
