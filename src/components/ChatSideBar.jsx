@@ -1,8 +1,29 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ChatBox from "../components/ChatBox";
 import ChatLog from "../components/ChatLog";
+import { fetchData } from "../../utils"; // Import the fetchData function
 
-const ChatSideBar = ({ sidebarItems, messages }) => {
+const ChatSideBar = () => {
+    const [convos, setConvos] = useState([]);
+    const [currentConvo, setCurrentConvo] = useState(null); // Change initial state to null
+
+    useEffect(() => {
+        const getConvos = async () => {
+            const token = localStorage.getItem("token");
+            const data = await fetchData("/api/messages/conversations", {
+                "Content-Type": "application/json",
+                Authorization: `Token ${token}`,
+            });
+            // const adsArray = data.map((convo) => convo.ad.title);
+            setConvos(data);
+
+            // Only set the currentConvo if it's not already set
+            if (!currentConvo) {
+                setCurrentConvo(convos[0].ad.title);
+            }
+        };
+        getConvos();
+    }, []);
 
     return (
         <section>
@@ -19,7 +40,7 @@ const ChatSideBar = ({ sidebarItems, messages }) => {
                     >
                         Open Conversations
                     </label>
-                    <ChatLog messages={messages} />
+                    <ChatLog messages={currentConvo ? currentConvo.messages : []} /> {/* Show messages if currentConvo is set */}
                     <ChatBox />
                 </div>
                 <div className="drawer-side">
@@ -29,9 +50,9 @@ const ChatSideBar = ({ sidebarItems, messages }) => {
                         className="drawer-overlay"
                     ></label>
                     <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content">
-                        {sidebarItems.map((item, idx) => (
-                            <li key={idx}>
-                                <a>{item}</a>
+                        {convos.map((convo) => (
+                            <li key={convo.id}>
+                                <a onClick={() => setCurrentConvo(convo)}>{convo.ad.title}</a>
                             </li>
                         ))}
                     </ul>
