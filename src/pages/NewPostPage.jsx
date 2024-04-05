@@ -12,6 +12,7 @@ const NewPostPage = () => {
     const [adContent, setAdContent] = useState("");
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("default");
+    const [images, setImages] = useState([]);
 
 
     const [isLoading, setIsLoading] = useState(false);
@@ -22,6 +23,10 @@ const NewPostPage = () => {
     useAuthCheck();
 
     const navigate = useNavigate();
+
+    const handleImagesChange = (images) => {
+        setImages(images);
+    };
 
     const handleChange = (e) => {
         const inputValue = e.target.value;
@@ -37,6 +42,7 @@ const NewPostPage = () => {
     };
 
     const handleSubmit = async (e) => {
+        console.log(images);
         e.preventDefault();
         setIsLoading(true);
 
@@ -46,7 +52,9 @@ const NewPostPage = () => {
             content: adContent,
             price: price,
             category: category,
+            images: images,
         }, {"Authorization": `Token ${localStorage.getItem("token")}`});
+
 
         setIsLoading(false);
         navigate("/");
@@ -147,7 +155,7 @@ const NewPostPage = () => {
                             <label htmlFor="adPhotos" className="label">
                                 Photos:
                             </label>
-                            <PhotoUpload />
+                            <PhotoUpload onImagesChange={handleImagesChange} />
                         </div>
                         <div className="card-actions justify-center">
                             <button
