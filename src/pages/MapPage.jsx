@@ -15,13 +15,45 @@ const MapPage = () => {
             popUp: "Toronto Metroplitan University"
         },
         {
-            geocode : [43.651070, -79.347015],
-            popUp: "Hello I am pop up 2"
+            geocode : [43.6585, -79.3801],
+            popUp: "Kerr Hall"
         },
         {
-            geocode : [43.651070, -79.347015],
-            popUp: "Hello I am pop up 3"
-        } 
+            geocode : [43.6577, -79.3773],
+            popUp: "George Vari Engineering Building"
+        },
+        {
+            geocode : [43.6544, -79.3807],
+            popUp: "Eaton Centre"
+        },
+        {
+            geocode : [43.65926, -79.377862],
+            popUp: "Architecture Building"
+        },
+        {
+            geocode : [43.6572, -79.3778],
+            popUp: "Daphne Cockwell Complex "
+        }, 
+        {
+            geocode : [43.662222, -79.380278],
+            popUp: "Maple Leaf Gardens"
+        }, 
+        {
+            geocode : [43.656111, -79.380278],
+            popUp: "Yonge and Dundas Square"
+        }, 
+        {
+            geocode : [43.6546, -79.3748],
+            popUp: "Ted Rogers School of Management"
+        },
+        {
+            geocode : [43.6586, -79.3771],
+            popUp: "Rogers Communication Centre"
+        }, 
+ 
+
+
+
     ];
 
     const customIcon = new Icon({
