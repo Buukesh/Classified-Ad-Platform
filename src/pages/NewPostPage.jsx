@@ -13,53 +13,71 @@ const NewPostPage = () => {
     const [price, setPrice] = useState("");
     const [category, setCategory] = useState("default");
     const [images, setImages] = useState([]);
-
-
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(""); // State to hold error messages
 
     const isFormValid =
-        adTitle && adItem && adContent && price && category !== "default";
+        adTitle && adItem && adContent && price && category !== "default" && images.length > 0;
 
     useAuthCheck();
 
     const navigate = useNavigate();
 
     const handleImagesChange = (images) => {
+        // Additional validations can be added here for images (e.g., file size, format)
         setImages(images);
     };
 
     const handleChange = (e) => {
-        const inputValue = e.target.value;
-        // Ensure the input value is a number and within the range of 0 to 99999
-        if (
-            inputValue === "" ||
-            (/^\d*$/.test(inputValue) &&
-                parseInt(inputValue, 10) >= 0 &&
-                parseInt(inputValue, 10) <= 99999)
-        ) {
-            setPrice(inputValue);
+        const { value, name } = e.target;
+        switch (name) {
+            case "price":
+                // Ensure the input value is a number and within the range of 0 to 99999
+                if (
+                    value === "" ||
+                    (/^\d*$/.test(value) && parseInt(value, 10) >= 0 && parseInt(value, 10) <= 99999)
+                ) {
+                    setPrice(value);
+                }
+                break;
+            default:
+                // Handle changes for other inputs (adTitle, adItem, adContent, category)
+                // This is a simplified version; you might need separate handlers for each input
+                setState((prevState) => ({ ...prevState, [name]: value }));
         }
     };
 
     const handleSubmit = async (e) => {
-        console.log(images);
         e.preventDefault();
+
+        if (!isFormValid) {
+            setError("Please fill in all fields correctly.");
+            return;
+        }
+
+        setError(""); // Reset error messages before making a new request
         setIsLoading(true);
 
-        const data = await postData("/api/ads", {
-            title: adTitle,
-            item: adItem,
-            content: adContent,
-            price: price,
-            category: category,
-            images: images,
-        }, {"Authorization": `Token ${localStorage.getItem("token")}`});
+        try {
+            const data = await postData("/api/ads", {
+                title: adTitle,
+                item: adItem,
+                content: adContent,
+                price: price,
+                category: category,
+                images: images,
+            }, {"Authorization": `Token ${localStorage.getItem("token")}`});
 
+            // Assume postData throws an error for invalid responses
+            navigate("/");
+        } catch (error) {
+            console.error("Submission error:", error);
+            setError("Failed to create the ad. Please try again later.");
+        }
 
         setIsLoading(false);
-        navigate("/");
-    }
-
+    };
+    
     return (
         <section>
             <NavBar />

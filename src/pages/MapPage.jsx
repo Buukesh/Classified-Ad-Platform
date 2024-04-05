@@ -50,11 +50,12 @@ const MapPage = () => {
             geocode : [43.6586, -79.3771],
             popUp: "Rogers Communication Centre"
         }, 
- 
-
-
 
     ];
+
+    // Validate geocode data
+    const isValidGeocode = (geocode) => Array.isArray(geocode) && geocode.length === 2 && geocode.every(Number.isFinite);
+
 
     const customIcon = new Icon({
         iconUrl:"https://cdn-icons-png.flaticon.com/128/684/684908.png",

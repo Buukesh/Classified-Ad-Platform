@@ -12,15 +12,47 @@ const AdView = () => {
 
     const ad = location.state;
 
-    const handleSendMessage = (e) => {
+    if (!ad) {
+        // Handle the case where ad is null or undefined
+        console.error("Ad details are missing.");
+        // Optionally, navigate back to a default page or show an error message
+        navigate("/"); // Redirect to home page or an error page
+        return null; // Prevent further rendering
+    }
+
+    // Add more checks as necessary for ad properties
+    const requiredProperties = ["title", "price", "content", "images", "user", "date", "modified", "category", "item"];
+    const missingProperties = requiredProperties.filter(prop => !(prop in ad));
+
+    if (missingProperties.length > 0) {
+        console.error("Missing ad properties:", missingProperties.join(", "));
+        navigate("/"); // Redirect or handle as needed
+        return null; // Prevent further rendering
+    }
+
+    // Ensure that ad.category is valid
+    if (!(ad.category in Category)) {
+        console.error("Invalid category:", ad.category);
+        navigate("/"); // Redirect or handle as needed
+        return null; // Prevent further rendering
+    }
+    
+    
+    const handleSendMessage = async (e) => {
         e.preventDefault();
 
-        // Should make post request here to start conversation
-        console.log(`Sending message to ${ad.user.username}`);
+        try {
+            // Replace the following console.log with your post request
+            console.log(`Sending message to ${ad.user.username}`);
+            // Example: await sendMessageApiCall(ad);
 
-        navigate("/messages"); // Then navigate to the messages page
+            navigate("/messages"); // Then navigate to the messages page
+        } catch (error) {
+            // Handle the error from the post request
+            console.error("Failed to send message:", error);
+            // Optionally, show an error message to the user
+        }
     };
-
     return (
         <section>
             <NavBar />

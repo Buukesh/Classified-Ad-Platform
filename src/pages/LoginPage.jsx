@@ -1,7 +1,5 @@
 import { useState } from "react";
-
 import { useNavigate } from "react-router-dom";
-
 import { postData } from "../../utils";
 
 const LoginPage = () => {
@@ -11,6 +9,7 @@ const LoginPage = () => {
     });
     const [isLoading, setIsLoading] = useState(false);
     const [showPassword, setShowPassword] = useState(false);
+    const [error, setError] = useState(""); // State to hold error messages
 
     const navigate = useNavigate();
 
@@ -25,27 +24,41 @@ const LoginPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // when this boolean is set, a loading animation will show
-        setIsLoading(true);
+        // Basic form validation
+        if (!formData.username || !formData.password) {
+            setError("Please fill in all fields.");
+            return;
+        }
 
-        const data = await postData("/api/token", {
-            username: formData.username,
-            password: formData.password,
-        });
+        setIsLoading(true);
+        setError(""); // Reset error messages before making a new request
+
+        try {
+            const data = await postData("/api/token", {
+                username: formData.username,
+                password: formData.password,
+            });
+
+            // Check if the API response includes a token; handle errors accordingly
+            if (data.token) {
+                localStorage.setItem("token", data.token);
+                navigate("/");
+            } else {
+                // Handle cases where the API response doesn't include a token
+                setError("Invalid login credentials.");
+            }
+        } catch (error) {
+            console.error("Login error:", error);
+            setError("Failed to login. Please try again later.");
+        }
 
         setIsLoading(false);
-
-        // save to local storage so it stays after refresh
-        localStorage.setItem("token", data.token);
-        
-        // go to homepage after logging in
-        navigate("/");
     };
 
     const toggleShowPassword = () => {
         setShowPassword(!showPassword);
     };
-
+    
     return (
         <section className="flex items-center justify-center min-h-screen">
             <div className="card w-96 bg-base-200 shadow-xl">
