@@ -14,13 +14,7 @@ const ChatSideBar = () => {
                 "Content-Type": "application/json",
                 Authorization: `Token ${token}`,
             });
-            // const adsArray = data.map((convo) => convo.ad.title);
             setConvos(data);
-
-            // Only set the currentConvo if it's not already set
-            if (!currentConvo) {
-                setCurrentConvo(convos[0].ad.title);
-            }
         };
         getConvos();
     }, []);
@@ -40,7 +34,8 @@ const ChatSideBar = () => {
                     >
                         Open Conversations
                     </label>
-                    <ChatLog messages={currentConvo ? currentConvo.messages : []} /> {/* Show messages if currentConvo is set */}
+                    {/* Need to figure out how to get name of user */}
+                    <ChatLog messages={currentConvo ? currentConvo.messages : []} sender="sample_name" /> {/* Show messages if currentConvo is set */}
                     <ChatBox />
                 </div>
                 <div className="drawer-side">
