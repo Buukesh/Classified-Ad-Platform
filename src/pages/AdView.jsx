@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom"
 
 import { formatDate } from "../../utils";
 import NavBar from "../components/Navbar";
@@ -7,12 +8,17 @@ import { Category } from "../constants";
 
 const AdView = () => {
     const location = useLocation();
+    const navigate = useNavigate();
 
     const ad = location.state;
 
-    const handleSendMessage = () => {
+    const handleSendMessage = (e) => {
         e.preventDefault();
+
+        // Should make post request here to start conversation
         console.log(`Sending message to ${ad.user.username}`);
+
+        navigate("/messages"); // Then navigate to the messages page
     };
 
     return (
