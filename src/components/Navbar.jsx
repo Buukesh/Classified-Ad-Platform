@@ -46,7 +46,7 @@ const NavBar = () => {
                             <a href="/">Ad Listings</a>
                         </li>
                         <li>
-                            <a href="/">Create Ad Post</a>
+                            <a href="/new">Create Ad Post</a>
                         </li>
                         <li>
                             <Link to="/map">View Map</Link>
