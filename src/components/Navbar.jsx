@@ -43,10 +43,10 @@ const NavBar = () => {
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         <li>
-                            <a>Ad Listings</a>
+                            <a href="/">Ad Listings</a>
                         </li>
                         <li>
-                            <a>Create Ad Post</a>
+                            <a href="/">Create Ad Post</a>
                         </li>
                     </ul>
                 </div>
