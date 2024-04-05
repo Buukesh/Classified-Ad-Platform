@@ -78,6 +78,7 @@ const NewPostPage = () => {
                                 className="input input-bordered input-primary w-full max-w-md"
                                 required
                                 value={adTitle}
+                                maxLength={50}
                                 onChange={(e) => setAdTitle(e.target.value)}
                             />
                         </div>
@@ -105,6 +106,7 @@ const NewPostPage = () => {
                                 className="textarea input-bordered input-primary w-full h-32 max-w-xl"
                                 required
                                 value={adContent}
+                                maxLength={500}
                                 onChange={(e) => setAdContent(e.target.value)}
                             ></textarea>
                         </div>
