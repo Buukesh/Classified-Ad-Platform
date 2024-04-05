@@ -17,6 +17,11 @@ const PhotoCarousel = ({ images }) => {
         
     };
 
+    if (!images || images.length === 0) {
+        // Render some fallback UI or null
+        return <div>No images to display</div>;
+      }
+
     return (
         <section>
             <div className="carousel w-full h-[40rem]">

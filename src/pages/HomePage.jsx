@@ -5,6 +5,7 @@ import NavBar from "../components/Navbar.jsx";
 import SearchBar from "../components/SearchBar.jsx";
 import useAuthCheck from "../hooks/useAuthCheck.js";
 
+
 const HomePage = () => {
     useAuthCheck();
 
@@ -21,6 +22,8 @@ const HomePage = () => {
             <SearchBar setSearchInput={setSearchInput} />
             <div className="my-10"></div>
             <AdList searchInput={searchInput} />
+            
+            
         </section>
     );
 };

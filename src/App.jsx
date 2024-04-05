@@ -8,6 +8,8 @@ import LoginPage from "./pages/LoginPage.jsx";
 import MessagesPage from "./pages/MessagesPage.jsx";
 import NewPostPage from "./pages/NewPostPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
+import MapPage from "./pages/MapPage.jsx"; // Make sure to create this component
+
 
 const router = createBrowserRouter([
     { path: "/", element: <HomePage /> },
@@ -16,6 +18,8 @@ const router = createBrowserRouter([
     { path: "/new", element: <NewPostPage /> },
     { path: "/adview/:id", element: <AdView /> },
     { path: "/messages", element: <MessagesPage /> },
+    { path: "/map", element: <MapPage /> },
+    
 ]);
 
 function App() {

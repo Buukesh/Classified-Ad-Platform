@@ -1,4 +1,6 @@
 import { useNavigate } from "react-router-dom";
+import { Link } from 'react-router-dom';
+
 
 const NavBar = () => {
     const navigate = useNavigate();
@@ -64,6 +66,13 @@ const NavBar = () => {
                     </li>
                     <li>
                         <a href="/new">Create Ad Post</a>
+                    </li>
+                </ul>
+            </div>
+            <div className="navbar-center hidden lg:flex">
+                <ul className="menu menu-horizontal px-1">
+                    <li>
+                        <Link to="/map">View Map</Link>
                     </li>
                 </ul>
             </div>
