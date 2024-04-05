@@ -48,6 +48,9 @@ const NavBar = () => {
                         <li>
                             <a href="/">Create Ad Post</a>
                         </li>
+                        <li>
+                            <Link to="/map">View Map</Link>
+                        </li>
                     </ul>
                 </div>
                 <a className="btn btn-ghost text-xl" href="/">
