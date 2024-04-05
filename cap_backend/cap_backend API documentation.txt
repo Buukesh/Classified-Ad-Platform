@@ -1,0 +1,326 @@
+openapi: 3.0.3
+info:
+  title: Classified Ad Platform API
+  version: 1.0.0
+  description: 'A commercial-grade web interface for a classified advertisements website
+    tailored specifically for students. '
+paths:
+  /api/ads:
+    get:
+      operationId: ads_list
+      tags:
+      - ads
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Ad'
+          description: ''
+    post:
+      operationId: ads_create
+      tags:
+      - ads
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Ad'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Ad'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Ad'
+          description: ''
+  /api/messages:
+    post:
+      operationId: messages_create
+      tags:
+      - messages
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Message'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Message'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Message'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Message'
+          description: ''
+  /api/messages/conversations:
+    get:
+      operationId: messages_conversations_list
+      tags:
+      - messages
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Conversation'
+          description: ''
+  /api/token:
+    post:
+      operationId: token_create
+      tags:
+      - token
+      requestBody:
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AuthToken'
+        required: true
+      security:
+      - tokenAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthToken'
+          description: ''
+  /api/users:
+    post:
+      operationId: users_create
+      tags:
+      - users
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+        required: true
+      security:
+      - tokenAuth: []
+      - {}
+      responses:
+        '201':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+components:
+  schemas:
+    Ad:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        content:
+          type: string
+        date:
+          type: string
+          format: date-time
+          readOnly: true
+        modified:
+          type: string
+          format: date-time
+          readOnly: true
+        user:
+          allOf:
+          - $ref: '#/components/schemas/PublicUser'
+          readOnly: true
+        price:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,8}(?:\.\d{0,2})?$
+        category:
+          $ref: '#/components/schemas/CategoryEnum'
+        item:
+          type: string
+          maxLength: 100
+        images:
+          type: array
+          items:
+            $ref: '#/components/schemas/AdImage'
+          readOnly: true
+      required:
+      - category
+      - content
+      - date
+      - id
+      - images
+      - item
+      - modified
+      - price
+      - title
+      - user
+    AdImage:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        ad:
+          type: integer
+          readOnly: true
+        src:
+          type: string
+          format: uri
+      required:
+      - ad
+      - id
+      - src
+    AuthToken:
+      type: object
+      properties:
+        username:
+          type: string
+          writeOnly: true
+        password:
+          type: string
+          writeOnly: true
+        token:
+          type: string
+          readOnly: true
+      required:
+      - password
+      - token
+      - username
+    CategoryEnum:
+      enum:
+      - IW
+      - IS
+      - AS
+      type: string
+      description: |-
+        * `IW` - Items Wanted
+        * `IS` - Items for Sale
+        * `AS` - Academic Services
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        ad:
+          allOf:
+          - $ref: '#/components/schemas/Ad'
+          readOnly: true
+        initiator:
+          allOf:
+          - $ref: '#/components/schemas/PublicUser'
+          readOnly: true
+        messages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Message'
+          readOnly: true
+      required:
+      - ad
+      - id
+      - initiator
+      - messages
+    Message:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        conversation:
+          type: integer
+          readOnly: true
+        message:
+          type: string
+        sender:
+          type: integer
+          readOnly: true
+        timestamp:
+          type: string
+          format: date-time
+          readOnly: true
+      required:
+      - conversation
+      - id
+      - message
+      - sender
+      - timestamp
+    PublicUser:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+      required:
+      - id
+      - username
+    User:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        username:
+          type: string
+          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+            only.
+          pattern: ^[\w.@+-]+$
+          maxLength: 150
+        password:
+          type: string
+          writeOnly: true
+        email:
+          type: string
+          format: email
+          title: Email address
+          maxLength: 254
+      required:
+      - id
+      - password
+      - username
+  securitySchemes:
+    tokenAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"
