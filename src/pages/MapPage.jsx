@@ -2,6 +2,8 @@ import { icon, point } from 'leaflet';
 import "/src/App.css";
 import "leaflet/dist/leaflet.css";
 
+import NavBar from "../components/Navbar.jsx";
+
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { Icon, divIcon } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
@@ -36,31 +38,31 @@ const MapPage = () => {
   });
   };
   
-  
   return (
-    <MapContainer center={[43.651070, -79.347015]} zoom={13}>
-      <TileLayer
-        attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
-        url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
-      />
+    <div>
+      <NavBar />
+      <MapContainer center={[43.651070, -79.347015]} zoom={13}>
+        <TileLayer
+          attribution="&copy; <a href='https://www.openstreetmap.org/copyright'>OpenStreetMap</a> contributors"
+          url='https://tile.openstreetmap.org/{z}/{x}/{y}.png'
+        />
 
-  <MarkerClusterGroup
-  chunkedLoading
-  iconCreateFunction={createCustomClusterIcon}
-  showCoverageOnHover={true}
-  >
-      {markers.map(marker => (
-        <Marker position={marker.geocode} icon={customIcon}>
-          <Popup>
-            {marker.popUp}
-          </Popup>
-
-        </Marker>
-
-      ))
-      }
-  </MarkerClusterGroup>
-  </MapContainer>
+        <MarkerClusterGroup
+          chunkedLoading
+          iconCreateFunction={createCustomClusterIcon}
+          showCoverageOnHover={true}
+        >
+          {markers.map(marker => (
+            <Marker position={marker.geocode} icon={customIcon}>
+              <Popup>
+                {marker.popUp}
+              </Popup>
+            </Marker>
+          ))}
+        </MarkerClusterGroup>
+      </MapContainer>
+    </div>
   );
 }; 
+
 export default MapPage;
