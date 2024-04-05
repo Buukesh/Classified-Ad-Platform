@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-import { fetchData } from "../../utils";
 import ChatSideBar from "../components/ChatSideBar";
 import NavBar from "../components/Navbar";
 
