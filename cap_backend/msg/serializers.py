@@ -9,10 +9,21 @@ UserModel = get_user_model()
 
 
 class MessageSerializer(serializers.ModelSerializer):
+    # rename fields
+    sender_id = serializers.IntegerField(source="sender.id", read_only=True)
+    sender = serializers.SerializerMethodField()
+
     class Meta:
         model = Message
-        fields = ("id", "conversation", "message", "sender", "timestamp")
-        read_only_fields = ("id", "sender", "timestamp", "conversation")
+        fields = ("id", "conversation", "message", "sender", "timestamp", "sender_id")
+        read_only_fields = ("id", "sender", "timestamp", "conversation", "sender_id")
+
+    def get_sender(self, obj):
+        # set the sender flag by comparing the one who made the request and the one in
+        # the message
+        user = self.context.get("request").user
+        # these are flipped in the frontend for some reason
+        return "receiver" if obj.sender == user else "sender"
 
 
 class ConversationSerializer(serializers.ModelSerializer):

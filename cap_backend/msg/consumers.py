@@ -88,26 +88,22 @@ class ChatConsumer(WebsocketConsumer):
             return
 
         # send message to recipient group (this sends to the other user's websocket)
+        # the "sender": "sender" part is for the frontend (daisy ui)
         recipient_group_name = f"user_{recipient_id}"
         async_to_sync(self.channel_layer.group_send)(
             recipient_group_name,
-            {
-                "type": "chat_message",
-                "message": new_msg,
-            },
+            {"type": "chat_message", "message": new_msg, "sender": "sender"},
         )
 
         # send back new msg object to sender to keep synced
         async_to_sync(self.channel_layer.group_send)(
             self.user_group_name,
-            {
-                "type": "chat_message",
-                "message": new_msg,
-            },
+            {"type": "chat_message", "message": new_msg, "sender": "receiver"},
         )
 
     def chat_message(self, event):
         message = event["message"]
+        sender = event["sender"]
 
         # manually serialize the message
         self.send(
@@ -116,8 +112,9 @@ class ChatConsumer(WebsocketConsumer):
                     "id": message.id,
                     "conversation": message.conversation.id,
                     "message": message.message,
-                    "sender": message.sender.id,
+                    "sender_id": message.sender.id,
                     "timestamp": message.timestamp.isoformat(),
+                    "sender": sender,
                 }
             )
         )
