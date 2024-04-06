@@ -97,6 +97,15 @@ class ChatConsumer(WebsocketConsumer):
             },
         )
 
+        # send back new msg object to sender to keep synced
+        async_to_sync(self.channel_layer.group_send)(
+            self.user_group_name,
+            {
+                "type": "chat_message",
+                "message": new_msg,
+            },
+        )
+
     def chat_message(self, event):
         message = event["message"]
 

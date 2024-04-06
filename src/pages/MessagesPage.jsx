@@ -25,6 +25,13 @@ const MessagesPage = () => {
         ws.onmessage = (e) => {
             const data = JSON.parse(e.data);
             console.log(data);
+
+            // update message list with new message
+            // both sent and received messages appear here
+            setCurrentConvo((currentConvo) => ({
+                ...currentConvo,
+                messages: [...currentConvo.messages, data],
+            }));
         };
 
         ws.onerror = () => {
