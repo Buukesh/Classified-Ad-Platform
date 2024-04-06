@@ -48,6 +48,9 @@ The API documentation is generated with `drf-spectacular` for the OpenAPI 3 sche
 
 Or `.\make_docs.bat`
 
+## Live Demo
+<https://classified-ad-platform-1.onrender.com/>
+
 ## Admin Dashboard
 
 <https://classified-ad-platform.onrender.com/admin>
