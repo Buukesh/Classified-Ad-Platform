@@ -38,12 +38,8 @@ const ChatSideBar = ({
                     >
                         Open Conversations
                     </label>
-                    {/* Need to figure out how to get name of user */}
-                    <ChatLog
-                        messages={currentConvo ? currentConvo.messages : []}
-                        sender="sample_name"
-                    />{" "}
-                    {/* Show messages if currentConvo is set */}
+
+                    <ChatLog messages={currentConvo ? currentConvo.messages : []} /> 
                     <ChatBox sendMsg={sendMsg} />
                 </div>
                 <div className="drawer-side">
