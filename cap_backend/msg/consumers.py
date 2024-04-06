@@ -46,15 +46,45 @@ class ChatConsumer(WebsocketConsumer):
     def receive(self, text_data=None, bytes_data=None):
         data = json.loads(text_data)
         message = data["message"]
-        recipient_id = data["recipient_id"]
         ad_id = data["ad_id"]
+        convo_id = data["convo_id"]
 
         logger.info("Received message")
 
         user = self.scope["user"]
+        new_msg = None
         if user.is_authenticated:
-            self.save_message(ad_id, user, message)
+            new_msg = self.save_message(ad_id, user, message)
         else:
+            return
+
+        # get ad from id
+        poster_id = None
+        try:
+            ad = Ad.objects.get(pk=ad_id)
+            poster_id = ad.user.id
+        except Ad.DoesNotExist:
+            logger.error("Ad doesn't exist.")
+            return
+
+        # get convo from id
+        initiator_id = None
+        try:
+            conversation = Conversation.objects.get(pk=convo_id)
+            initiator_id = conversation.initiator.id
+        except Conversation.DoesNotExist:
+            logger.error("Conversation doesn't exist.")
+            return
+
+        # the recipient can be found out because conversations are always 1 to 1
+        # so if the sender is the ad poster, the recipient is the initiator
+        recipient_id = None
+        if user.id == initiator_id:
+            recipient_id = poster_id
+        elif user.id == poster_id:
+            recipient_id = initiator_id
+        else:
+            logger.error("Invalid user id.")
             return
 
         # send message to recipient group (this sends to the other user's websocket)
@@ -63,20 +93,22 @@ class ChatConsumer(WebsocketConsumer):
             recipient_group_name,
             {
                 "type": "chat_message",
-                "message": message,
-                "sender_id": user.id,
+                "message": new_msg,
             },
         )
 
     def chat_message(self, event):
         message = event["message"]
-        sender_id = event["sender_id"]
 
+        # manually serialize the message
         self.send(
             text_data=json.dumps(
                 {
-                    "message": message,
-                    "sender_id": sender_id,
+                    "id": message.id,
+                    "conversation": message.conversation.id,
+                    "message": message.message,
+                    "sender": message.sender.id,
+                    "timestamp": message.timestamp.isoformat(),
                 }
             )
         )
@@ -97,6 +129,6 @@ class ChatConsumer(WebsocketConsumer):
             ad=ad, defaults={"initiator": user}
         )
         # then add message to db
-        Message.objects.create(
+        return Message.objects.create(
             conversation=conversation, sender=user, message=message
         )

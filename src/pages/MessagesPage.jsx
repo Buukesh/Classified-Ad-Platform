@@ -41,13 +41,14 @@ const MessagesPage = () => {
     }, []);
 
     const sendMsg = (msg) => {
+        console.log(currentConvo);
+
         wsRef.current.send(
             JSON.stringify({
                 type: "msg",
                 message: msg,
-                // TODO temporary id (should be found dynamically)
-                recipient_id: currentConvo.ad.id,
                 ad_id: currentConvo.ad.id,
+                convo_id: currentConvo.id,
             })
         );
     };
