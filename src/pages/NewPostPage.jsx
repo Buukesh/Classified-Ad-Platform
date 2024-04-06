@@ -1,10 +1,11 @@
 import { useState } from "react";
+
 import { useNavigate } from "react-router-dom";
 
+import { postData } from "../../utils.js";
 import NavBar from "../components/Navbar.jsx";
 import PhotoUpload from "../components/PhotoUpload.jsx";
 import useAuthCheck from "../hooks/useAuthCheck.js";
-import { postData } from "../../utils.js";
 
 const NewPostPage = () => {
     const [adTitle, setAdTitle] = useState("");
@@ -17,7 +18,12 @@ const NewPostPage = () => {
     const [error, setError] = useState(""); // State to hold error messages
 
     const isFormValid =
-        adTitle && adItem && adContent && price && category !== "default" && images.length > 0;
+        adTitle &&
+        adItem &&
+        adContent &&
+        price &&
+        category !== "default" &&
+        images.length > 0;
 
     useAuthCheck();
 
@@ -35,7 +41,9 @@ const NewPostPage = () => {
                 // Ensure the input value is a number and within the range of 0 to 99999
                 if (
                     value === "" ||
-                    (/^\d*$/.test(value) && parseInt(value, 10) >= 0 && parseInt(value, 10) <= 99999)
+                    (/^\d*$/.test(value) &&
+                        parseInt(value, 10) >= 0 &&
+                        parseInt(value, 10) <= 99999)
                 ) {
                     setPrice(value);
                 }
@@ -59,16 +67,22 @@ const NewPostPage = () => {
         setIsLoading(true);
 
         try {
-            const data = await postData("/api/ads", {
-                title: adTitle,
-                item: adItem,
-                content: adContent,
-                price: price,
-                category: category,
-                images: images,
-            }, {"Authorization": `Token ${localStorage.getItem("token")}`});
+            // image upload requires a multipart form upload
+            // and to do that, formData obj is needed
+            const formData = new FormData();
+            formData.append("title", adTitle);
+            formData.append("item", adItem);
+            formData.append("content", adContent);
+            formData.append("price", price);
+            formData.append("category", category);
+            for (const image of images) {
+                formData.append("images", image, image.name);
+            }
 
-            // Assume postData throws an error for invalid responses
+            await postData("/api/ads", formData, {
+                Authorization: `Token ${localStorage.getItem("token")}`,
+            });
+
             navigate("/");
         } catch (error) {
             console.error("Submission error:", error);
@@ -77,7 +91,7 @@ const NewPostPage = () => {
 
         setIsLoading(false);
     };
-    
+
     return (
         <section>
             <NavBar />
@@ -160,15 +174,9 @@ const NewPostPage = () => {
                                 <option value="default" disabled>
                                     Select Category
                                 </option>
-                                <option value="IW">
-                                    Items Wanted
-                                </option>
-                                <option value="IS">
-                                    Items for Sale
-                                </option>
-                                <option value="AS">
-                                    Academic Services
-                                </option>
+                                <option value="IW">Items Wanted</option>
+                                <option value="IS">Items for Sale</option>
+                                <option value="AS">Academic Services</option>
                             </select>
                         </div>
                         <div>

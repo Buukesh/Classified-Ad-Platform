@@ -17,10 +17,15 @@ export const fetchData = async (url, headers = {}) => {
 };
 
 export const postData = async (url, body = {}, headers = {}) => {
+    // form data is handled differently than json
+    const isFormData = body instanceof FormData;
+
     const options = {
         method: "POST",
-        headers: { "Content-Type": "application/json", ...headers },
-        body: JSON.stringify(body),
+        headers: isFormData
+            ? { ...headers }
+            : { "Content-Type": "application/json", ...headers },
+        body: isFormData ? body : JSON.stringify(body),
     };
 
     try {
