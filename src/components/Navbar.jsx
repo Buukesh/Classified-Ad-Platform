@@ -43,7 +43,7 @@ const NavBar = () => {
                         className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52"
                     >
                         <li>
-                            <a href="/">Ad Listings</a>
+                            <Link to="/">Ad Listings</Link>
                         </li>
                         <li>
                             <Link to="/new">Create Ad Post</Link>
@@ -65,7 +65,7 @@ const NavBar = () => {
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <a href="/">Ad Listings</a>
+                        <Link to="/">Ad Listings</Link>
                     </li>
                     <li>
                         <Link to="/new">Create Ad Post</Link>
@@ -82,9 +82,9 @@ const NavBar = () => {
             <div className="navbar-end">
                 <ul className="menu menu-horizontal px-1">
                     <li>
-                        <a className="btn" onClick={goToMessagesPage}>
+                        <Link to="/messages" className="btn">
                             Messages
-                        </a>
+                        </Link>
                     </li>
                     <li>
                         <a className="btn" onClick={logout}>
