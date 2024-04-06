@@ -1,11 +1,11 @@
-import { useState, useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 
 import ChatSideBar from "../components/ChatSideBar";
 import NavBar from "../components/Navbar";
+import useAppContext from "../hooks/useAppContext";
 
 const MessagesPage = () => {
-    const [convos, setConvos] = useState([]);
-    const [currentConvo, setCurrentConvo] = useState(null);
+    const { setCurrentConvo, currentConvo } = useAppContext();
 
     const wsRef = useRef(null);
 
@@ -63,13 +63,7 @@ const MessagesPage = () => {
         <section>
             <NavBar />
             <div>
-                <ChatSideBar
-                    convos={convos}
-                    setConvos={setConvos}
-                    currentConvo={currentConvo}
-                    setCurrentConvo={setCurrentConvo}
-                    sendMsg={sendMsg}
-                />
+                <ChatSideBar sendMsg={sendMsg} />
             </div>
         </section>
     );

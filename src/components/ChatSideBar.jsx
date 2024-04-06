@@ -17,6 +17,8 @@ const ChatSideBar = ({ sendMsg }) => {
                 Authorization: `Token ${token}`,
             });
             setConvos(data);
+            // always open latest convo when opening msg page
+            setCurrentConvo(data[data.length - 1]);
         };
         getConvos();
     }, []);
