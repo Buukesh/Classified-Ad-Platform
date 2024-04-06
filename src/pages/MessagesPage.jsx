@@ -5,7 +5,7 @@ import NavBar from "../components/Navbar";
 import useAppContext from "../hooks/useAppContext";
 
 const MessagesPage = () => {
-    const { setCurrentConvo, currentConvo } = useAppContext();
+    const { setConvos, getCurrentConvo } = useAppContext();
 
     const wsRef = useRef(null);
 
@@ -25,13 +25,23 @@ const MessagesPage = () => {
         ws.onmessage = (e) => {
             const data = JSON.parse(e.data);
             console.log(data);
+            const convoId = data.conversation;
 
-            // update message list with new message
             // both sent and received messages appear here
-            setCurrentConvo((currentConvo) => ({
-                ...currentConvo,
-                messages: [...currentConvo.messages, data],
-            }));
+            // update convo array with new message
+            setConvos((prevConvos) => {
+                const updatedConvos = prevConvos.map((convo) => {
+                    if (convo.id === convoId) {
+                        return {
+                            ...convo,
+                            messages: [...convo.messages, data],
+                        };
+                    } else {
+                        return convo;
+                    }
+                });
+                return updatedConvos;
+            });
         };
 
         ws.onerror = () => {
@@ -48,14 +58,12 @@ const MessagesPage = () => {
     }, []);
 
     const sendMsg = (msg) => {
-        console.log(currentConvo);
-
         wsRef.current.send(
             JSON.stringify({
                 type: "msg",
                 message: msg,
-                ad_id: currentConvo.ad.id,
-                convo_id: currentConvo.id,
+                ad_id: getCurrentConvo().ad.id,
+                convo_id: getCurrentConvo().id,
             })
         );
     };

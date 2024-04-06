@@ -8,7 +8,11 @@ export const AppProvider = ({ children }) => {
     const [token, setToken] = useState(null);
 
     const [convos, setConvos] = useState([]);
-    const [currentConvo, setCurrentConvo] = useState(null);
+    const [currentConvoId, setCurrentConvoId] = useState(null);
+
+    const getCurrentConvo = () => {
+        return convos.find((convo) => convo.id === currentConvoId) || null;
+    };
 
     return (
         <AppContext.Provider
@@ -17,8 +21,9 @@ export const AppProvider = ({ children }) => {
                 setToken,
                 convos,
                 setConvos,
-                currentConvo,
-                setCurrentConvo,
+                currentConvoId,
+                setCurrentConvoId,
+                getCurrentConvo,
             }}
         >
             {children}

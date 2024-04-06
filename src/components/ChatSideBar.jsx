@@ -6,8 +6,13 @@ import ChatLog from "../components/ChatLog";
 import useAppContext from "../hooks/useAppContext";
 
 const ChatSideBar = ({ sendMsg }) => {
-    const { convos, setConvos, currentConvo, setCurrentConvo } =
-        useAppContext();
+    const {
+        convos,
+        setConvos,
+        currentConvoId,
+        setCurrentConvoId,
+        getCurrentConvo,
+    } = useAppContext();
 
     useEffect(() => {
         const getConvos = async () => {
@@ -18,7 +23,7 @@ const ChatSideBar = ({ sendMsg }) => {
             });
             setConvos(data);
             // always open latest convo when opening msg page
-            setCurrentConvo(data[data.length - 1]);
+            setCurrentConvoId(data[data.length - 1].id);
         };
         getConvos();
     }, []);
@@ -40,7 +45,9 @@ const ChatSideBar = ({ sendMsg }) => {
                     </label>
 
                     <ChatLog
-                        messages={currentConvo ? currentConvo.messages : []}
+                        messages={
+                            currentConvoId ? getCurrentConvo().messages : []
+                        }
                     />
                     <ChatBox sendMsg={sendMsg} />
                 </div>
@@ -53,7 +60,7 @@ const ChatSideBar = ({ sendMsg }) => {
                     <ul className="menu p-4 w-80 min-h-full bg-base-300 text-base-content">
                         {convos.map((convo) => (
                             <li key={convo.id}>
-                                <a onClick={() => setCurrentConvo(convo)}>
+                                <a onClick={() => setCurrentConvoId(convo.id)}>
                                     {convo.ad.title}
                                 </a>
                             </li>
