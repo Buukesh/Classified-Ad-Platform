@@ -50,7 +50,7 @@ Or `.\make_docs.bat`
 
 ## Admin Dashboard
 
-<http://127.0.0.1:8000/admin>
+<https://classified-ad-platform.onrender.com/admin>
 
 ## API Documentation
 
