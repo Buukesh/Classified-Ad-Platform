@@ -28,6 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['classified-ad-platform.onrender.com', 'localhost']
 
+CORS_ALLOW_CREDENTIALS = True  # Set to True to allow cookies to be included in cross-origin requests
 
 # Application definition
 
