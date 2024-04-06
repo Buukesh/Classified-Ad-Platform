@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "https://classified-ad-platform.onrender.com/",
+        target: "https://classified-ad-platform.onrender.com",
         changeOrigin: true,
       },
     },
