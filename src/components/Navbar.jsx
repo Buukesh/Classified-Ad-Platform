@@ -46,7 +46,7 @@ const NavBar = () => {
                             <a href="/">Ad Listings</a>
                         </li>
                         <li>
-                            <a href="/new">Create Ad Post</a>
+                            <Link to="/new">Create Ad Post</Link>
                         </li>
                         <li>
                             <Link to="/map">View Map</Link>
@@ -68,7 +68,7 @@ const NavBar = () => {
                         <a href="/">Ad Listings</a>
                     </li>
                     <li>
-                        <a href="/new">Create Ad Post</a>
+                        <Link to="/new">Create Ad Post</Link>
                     </li>
                 </ul>
             </div>
