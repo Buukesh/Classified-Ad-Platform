@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ['classified-ad-platform.onrender.com', 'localhost']
 INSTALLED_APPS = [
     "daphne",
     "channels",
+    "corsheaders",
     "rest_framework",
     "rest_framework.authtoken",
     "drf_spectacular",
