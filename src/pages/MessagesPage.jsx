@@ -13,7 +13,7 @@ const MessagesPage = () => {
         const token = localStorage.getItem("token");
 
         wsRef.current = new WebSocket(
-            `wss://classified-ad-platform.onrender.com/ws/messages/?token=${token}`
+            `ws://localhost:8000/ws/messages/?token=${token}`
         );
 
         const ws = wsRef.current;
