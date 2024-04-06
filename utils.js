@@ -1,6 +1,6 @@
 export const fetchData = async (url, headers = {}) => {
     try {
-        const response = await fetch(url, {
+        const response = await fetch(`https://classified-ad-platform.onrender.com${url}`, {
             headers: { "Content-Type": "application/json", ...headers },
         });
         const data = await response.json();
@@ -29,7 +29,7 @@ export const postData = async (url, body = {}, headers = {}) => {
     };
 
     try {
-        const response = await fetch(url, options);
+        const response = await fetch(`https://classified-ad-platform.onrender.com${url}`, options);
         const data = await response.json();
         if (!response.ok) {
             console.log(`HTTP error: ${response.status}`);
