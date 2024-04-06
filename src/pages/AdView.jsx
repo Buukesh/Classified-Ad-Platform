@@ -1,7 +1,6 @@
-import { useLocation } from "react-router-dom";
-import { useNavigate } from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom";
 
-import { formatDate } from "../../utils";
+import { formatDate, postData } from "../../utils";
 import NavBar from "../components/Navbar";
 import PhotoCarousel from "../components/PhotoCarousel";
 import { Category } from "../constants";
@@ -21,8 +20,20 @@ const AdView = () => {
     }
 
     // Add more checks as necessary for ad properties
-    const requiredProperties = ["title", "price", "content", "images", "user", "date", "modified", "category", "item"];
-    const missingProperties = requiredProperties.filter(prop => !(prop in ad));
+    const requiredProperties = [
+        "title",
+        "price",
+        "content",
+        "images",
+        "user",
+        "date",
+        "modified",
+        "category",
+        "item",
+    ];
+    const missingProperties = requiredProperties.filter(
+        (prop) => !(prop in ad)
+    );
 
     if (missingProperties.length > 0) {
         console.error("Missing ad properties:", missingProperties.join(", "));
@@ -36,21 +47,26 @@ const AdView = () => {
         navigate("/"); // Redirect or handle as needed
         return null; // Prevent further rendering
     }
-    
-    
+
     const handleSendMessage = async (e) => {
         e.preventDefault();
 
         try {
-            // Replace the following console.log with your post request
-            console.log(`Sending message to ${ad.user.username}`);
-            // Example: await sendMessageApiCall(ad);
+            // for now, start conversation with hardcoded "Hello!"
+            // this should be changed
+            await postData(
+                "/api/messages",
+                {
+                    ad_id: ad.id,
+                    message: "Hello!",
+                },
+                { Authorization: `Token ${localStorage.getItem("token")}` }
+            );
 
-            navigate("/messages"); // Then navigate to the messages page
+            // navigate to the messages page (this new convo will be opened)
+            navigate("/messages");
         } catch (error) {
-            // Handle the error from the post request
             console.error("Failed to send message:", error);
-            // Optionally, show an error message to the user
         }
     };
     return (

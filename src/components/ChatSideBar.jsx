@@ -3,14 +3,12 @@ import { useEffect } from "react";
 import { fetchData } from "../../utils";
 import ChatBox from "../components/ChatBox";
 import ChatLog from "../components/ChatLog";
+import useAppContext from "../hooks/useAppContext";
 
-const ChatSideBar = ({
-    convos,
-    setConvos,
-    currentConvo,
-    setCurrentConvo,
-    sendMsg,
-}) => {
+const ChatSideBar = ({ sendMsg }) => {
+    const { convos, setConvos, currentConvo, setCurrentConvo } =
+        useAppContext();
+
     useEffect(() => {
         const getConvos = async () => {
             const token = localStorage.getItem("token");
@@ -19,6 +17,8 @@ const ChatSideBar = ({
                 Authorization: `Token ${token}`,
             });
             setConvos(data);
+            // always open latest convo when opening msg page
+            setCurrentConvo(data[data.length - 1]);
         };
         getConvos();
     }, []);
@@ -39,7 +39,9 @@ const ChatSideBar = ({
                         Open Conversations
                     </label>
 
-                    <ChatLog messages={currentConvo ? currentConvo.messages : []} /> 
+                    <ChatLog
+                        messages={currentConvo ? currentConvo.messages : []}
+                    />
                     <ChatBox sendMsg={sendMsg} />
                 </div>
                 <div className="drawer-side">
