@@ -61,5 +61,8 @@ Or `.\make_docs.bat`
 
 ## Known issues
 
-On live demo messages may not work because free tier of deployment services only allows a short window before websockets are disconnected
+On hosted website messages may not work because free tier of deployment services only allows a short window before websockets are disconnected
+
+Authentication to login may also be slow on the hosted website
+
 Images don't load on Firefox browser
