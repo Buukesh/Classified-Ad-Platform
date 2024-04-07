@@ -61,4 +61,5 @@ Or `.\make_docs.bat`
 
 ## Known issues
 
+On live demo messages may not work because free tier of deployment services only allows a short window before websockets are disconnected
 Images don't load on Firefox browser
