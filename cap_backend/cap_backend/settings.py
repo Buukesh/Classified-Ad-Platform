@@ -26,7 +26,7 @@ SECRET_KEY = "django-insecure-xbxk#l%5l82u4yvp0tj4se8zs)*6de-slo*20q4@by@l2l@ee3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['classified-ad-platform.onrender.com', 'https://classified-ad-platform-1.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['classified-ad-platform.onrender.com', 'classified-ad-platform-1.onrender.com', 'localhost', '127.0.0.1']
 
 CORS_ORIGIN_ALLOW_ALL = True # Set to True to allow all origins
 CORS_ALLOW_CREDENTIALS = True  # Set to True to allow cookies to be included in cross-origin requests
