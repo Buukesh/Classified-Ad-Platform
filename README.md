@@ -65,4 +65,4 @@ On hosted website messages may not work because free tier of deployment services
 
 Authentication to login may also be slow on the hosted website
 
-Images don't load on Firefox browser
+http images may not load on browser because of browser's mixed content policies. 
