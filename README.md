@@ -53,7 +53,7 @@ Or `.\make_docs.bat`
 
 ## Admin Dashboard
 
-<https://classified-ad-platform.onrender.com/admin>
+<https://classified-ad-platform-1.onrender.com/admin>
 
 ## API Documentation
 
